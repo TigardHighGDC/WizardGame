@@ -5,23 +5,23 @@ using UnityEngine.EventSystems;
 
 public class JoyStick : MonoBehaviour
 {
-    public GameObject joystick;
-    public GameObject joystickBG;
-    public Vector2 joystickVec;
+    public GameObject Joystick;
+    public GameObject JoystickBG;
+    public Vector2 JoystickVec;
     private Vector2 joystickTouchPos;
     private Vector2 joystickOriginalPos;
     private float joystickRadius;
 
     void Start()
     {
-        joystickOriginalPos = joystickBG.transform.position;
-        joystickRadius = joystickBG.GetComponent<RectTransform>().sizeDelta.y / 4;
+        joystickOriginalPos = JoystickBG.transform.position;
+        joystickRadius = JoystickBG.GetComponent<RectTransform>().sizeDelta.y / 4;
     }
 
     public void PointerDown()
     {
-        joystick.transform.position = Input.mousePosition;
-        joystickBG.transform.position = Input.mousePosition;
+        Joystick.transform.position = Input.mousePosition;
+        JoystickBG.transform.position = Input.mousePosition;
         joystickTouchPos = Input.mousePosition;
     }
 
@@ -29,25 +29,25 @@ public class JoyStick : MonoBehaviour
     {
         PointerEventData pointerEventData = baseEventData as PointerEventData;
         Vector2 dragPos = pointerEventData.position;
-        joystickVec = (dragPos - joystickTouchPos).normalized;
+        JoystickVec = (dragPos - joystickTouchPos).normalized;
 
         float joystickDist = Vector2.Distance(dragPos, joystickTouchPos);
 
         if (joystickDist < joystickRadius)
         {
-            joystick.transform.position = joystickTouchPos + joystickVec * joystickDist;
+            Joystick.transform.position = joystickTouchPos + JoystickVec * joystickDist;
         }
 
         else
         {
-            joystick.transform.position = joystickTouchPos + joystickVec * joystickRadius;
+            Joystick.transform.position = joystickTouchPos + JoystickVec * joystickRadius;
         }
     }
 
     public void PointerUp()
     {
-        joystickVec = Vector2.zero;
-        joystick.transform.position = joystickOriginalPos;
-        joystickBG.transform.position = joystickOriginalPos;
+        JoystickVec = Vector2.zero;
+        Joystick.transform.position = joystickOriginalPos;
+        JoystickBG.transform.position = joystickOriginalPos;
     }
 }

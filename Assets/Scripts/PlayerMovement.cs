@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public JoyStick joyStick;
-    public float playerSpeed;
+    public JoyStick JoyStick;
+    public float PlayerSpeed;
     private Rigidbody2D rb;
 
     private void Start()
@@ -15,9 +15,9 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (joyStick.joystickVec.y != 0)
+        if (JoyStick.JoystickVec.y != 0)
         {
-            rb.velocity = new Vector2(joyStick.joystickVec.x * playerSpeed, joyStick.joystickVec.y * playerSpeed);
+            rb.velocity = new Vector2(JoyStick.JoystickVec.x * PlayerSpeed, JoyStick.JoystickVec.y * PlayerSpeed);
         }
 
         else
