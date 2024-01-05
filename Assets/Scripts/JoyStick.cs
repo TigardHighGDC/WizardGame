@@ -8,23 +8,67 @@ public class JoyStick : MonoBehaviour
     public GameObject Joystick;
     public GameObject JoystickBG;
     public Vector2 JoystickVec;
+
     private Vector2 joystickTouchPos;
     private Vector2 joystickOriginalPos;
     private float joystickRadius;
 
     void Start()
     {
+        // Joystick starting position
         joystickOriginalPos = JoystickBG.transform.position;
         joystickRadius = JoystickBG.GetComponent<RectTransform>().sizeDelta.y / 4;
     }
 
-    public void PointerDown()
+    void Update() // Collider2D other
     {
-        Joystick.transform.position = Input.mousePosition;
-        JoystickBG.transform.position = Input.mousePosition;
-        joystickTouchPos = Input.mousePosition;
+        if (Input.touchCount > 0)
+        {
+            Touch touch = Input.GetTouch(0);
+
+            // Handle finger movements based on TouchPhase
+            switch (touch.phase)
+            {
+            // When a touch has first been detected, change the message and record the starting position
+            case TouchPhase.Began:
+                // Record initial touch position.
+                Collider2D[] colliders = Physics2D.OverlapPointAll(AdjustPointToScreen(5, touch.position));
+
+                HashSet<string> tag = new HashSet<string>();
+                foreach (Collider2D collider in colliders)
+                {
+                    tag.Add(collider.gameObject.tag);
+                }
+                // priority interactions
+                if (tag.Contains("Item"))
+                {
+                    Debug.Log("Item");
+                }
+                else if (tag.Contains("NPC"))
+                {
+                    Debug.Log("NPC");
+                }
+                // if nothing clicked move joystick to touch position
+                else
+                {
+                    Joystick.transform.position = touch.position;
+                    JoystickBG.transform.position = touch.position;
+                    joystickTouchPos = touch.position;
+                }
+                break;
+
+            // Determine if the touch is a moving touch
+            case TouchPhase.Ended:
+                // Report that the touch has ended when it ends
+                JoystickVec = Vector2.zero;
+                Joystick.transform.position = joystickOriginalPos;
+                JoystickBG.transform.position = joystickOriginalPos;
+                break;
+            }
+        }
     }
 
+    // for the draging
     public void Drag(BaseEventData baseEventData)
     {
         PointerEventData pointerEventData = baseEventData as PointerEventData;
@@ -44,10 +88,16 @@ public class JoyStick : MonoBehaviour
         }
     }
 
-    public void PointerUp()
+    private Vector3 AdjustPointToScreen(float cameraHeight, Vector3 position)
     {
-        JoystickVec = Vector2.zero;
-        Joystick.transform.position = joystickOriginalPos;
-        JoystickBG.transform.position = joystickOriginalPos;
+        // Center the point to the screen
+        position.x = position.x - (Screen.width / 2f);
+        position.y = position.y - (Screen.height / 2f);
+
+        // Adjust the point to the camera
+        position.x = (position.x / Screen.width) * cameraHeight * (Screen.width / (float)Screen.height) * 2f;
+        position.y = (position.y / Screen.height) * cameraHeight * 2f;
+
+        return position;
     }
 }
