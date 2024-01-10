@@ -14,15 +14,14 @@ public class MovementJoystick : MonoBehaviour
     private Vector2 joystickOriginalPos;
     private float joystickRadius;
 
-
     void Start()
     {
-        //Joystick starting position
+        // Joystick starting position
         joystickOriginalPos = joystickBG.transform.position;
         joystickRadius = joystickBG.GetComponent<RectTransform>().sizeDelta.y / 4;
     }
 
-    void Update() //Collider2D other
+    void Update() // Collider2D other
     {
         if (Input.touchCount > 0)
         {
@@ -31,49 +30,48 @@ public class MovementJoystick : MonoBehaviour
             // Handle finger movements based on TouchPhase
             switch (touch.phase)
             {
-                //When a touch has first been detected, change the message and record the starting position
-                case TouchPhase.Began:
-                    // Record initial touch position.
-                    Collider2D[] colliders = Physics2D.OverlapPointAll(AdjustPointToScreen(5, touch.position));
-                    HashSet<string> tag = new HashSet<string>();
-                    foreach (Collider2D collider in colliders)
-                    {
-                        tag.Add(collider.gameObject.tag);
-                    }
-                    //priority interactions
-                    if(tag.Contains("Item"))
-                    {
-                        Debug.Log("Item");  
-                    }
-                    else if (tag.Contains("NPC"))
-                    {
-                        Debug.Log("NPC");
-                    }
-                    else if (tag.Contains("Quit"))
-                    {
-                        Debug.Log("Quit");
-                        Application.Quit();
-                    }
-                    //if nothing clicked move joystick to touch position
-                    else
-                    {
-                        joystick.transform.position = touch.position;
-                        joystickBG.transform.position = touch.position;
-                        joystickTouchPos = touch.position;
-                    }
-                    break;
+            // When a touch has first been detected, change the message and record the starting position
+            case TouchPhase.Began:
+                // Record initial touch position.
+                Collider2D[] colliders = Physics2D.OverlapPointAll(AdjustPointToScreen(5, touch.position));
+                HashSet<string> tag = new HashSet<string>();
+                foreach (Collider2D collider in colliders)
+                {
+                    tag.Add(collider.gameObject.tag);
+                }
+                // priority interactions
+                if (tag.Contains("Item"))
+                {
+                    Debug.Log("Item");
+                }
+                else if (tag.Contains("NPC"))
+                {
+                    Debug.Log("NPC");
+                }
+                else if (tag.Contains("Quit"))
+                {
+                    Debug.Log("Quit");
+                    Application.Quit();
+                }
+                // if nothing clicked move joystick to touch position
+                else
+                {
+                    joystick.transform.position = touch.position;
+                    joystickBG.transform.position = touch.position;
+                    joystickTouchPos = touch.position;
+                }
+                break;
 
-                //Determine if the touch is a moving touch
-                case TouchPhase.Ended:
-                    // Report that the touch has ended when it ends
-                    joystickVec = Vector2.zero;
-                    joystick.transform.position = joystickOriginalPos;
-                    joystickBG.transform.position = joystickOriginalPos;
-                    break;
+            // Determine if the touch is a moving touch
+            case TouchPhase.Ended:
+                // Report that the touch has ended when it ends
+                joystickVec = Vector2.zero;
+                joystick.transform.position = joystickOriginalPos;
+                joystickBG.transform.position = joystickOriginalPos;
+                break;
             }
         }
     }
-
 
     // for the draging
     public void Drag(BaseEventData baseEventData)
@@ -84,7 +82,7 @@ public class MovementJoystick : MonoBehaviour
 
         float joystickDist = Vector2.Distance(dragPos, joystickTouchPos);
 
-        if(joystickDist < joystickRadius)
+        if (joystickDist < joystickRadius)
         {
             joystick.transform.position = joystickTouchPos + joystickVec * joystickDist;
         }

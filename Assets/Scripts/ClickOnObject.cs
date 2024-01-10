@@ -14,17 +14,17 @@ public class ClickOnObject : MonoBehaviour
             // Handle finger movements based on TouchPhase
             switch (touch.phase)
             {
-                //When a touch has first been detected, change the message and record the starting position
-                case TouchPhase.Began:
-                    // Record initial touch position.
-                    Debug.Log("Word");
-                    break;
+            // When a touch has first been detected, change the message and record the starting position
+            case TouchPhase.Began:
+                // Record initial touch position.
+                Debug.Log("Word");
+                break;
 
-                //Determine if the touch is a moving touch
-                case TouchPhase.Ended:
-                    // Report that the touch has ended when it ends
-                    Debug.Log("Bye bye");
-                    break;
+            // Determine if the touch is a moving touch
+            case TouchPhase.Ended:
+                // Report that the touch has ended when it ends
+                Debug.Log("Bye bye");
+                break;
             }
         }
     }

@@ -15,9 +15,10 @@ public class Player : MonoBehaviour
 
     void FixedUpdate()
     {
-        if(movementJoystick.joystickVec.y != 0)
+        if (movementJoystick.joystickVec.y != 0)
         {
-            rb.velocity = new Vector2(movementJoystick.joystickVec.x * playerSpeed, movementJoystick.joystickVec.y * playerSpeed);
+            rb.velocity =
+                new Vector2(movementJoystick.joystickVec.x * playerSpeed, movementJoystick.joystickVec.y * playerSpeed);
         }
 
         else
