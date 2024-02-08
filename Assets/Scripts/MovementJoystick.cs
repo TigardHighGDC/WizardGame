@@ -19,6 +19,8 @@ public class MovementJoystick : MonoBehaviour
         // Joystick starting position
         joystickOriginalPos = joystickBG.transform.position;
         joystickRadius = joystickBG.GetComponent<RectTransform>().sizeDelta.y / 4;
+        joystick.SetActive(false);
+        joystickBG.SetActive(false);
     }
 
     void Update() // Collider2D other
@@ -56,6 +58,8 @@ public class MovementJoystick : MonoBehaviour
                 // if nothing clicked move joystick to touch position
                 else
                 {
+                    joystick.SetActive(true);
+                    joystickBG.SetActive(true);
                     joystick.transform.position = touch.position;
                     joystickBG.transform.position = touch.position;
                     joystickTouchPos = touch.position;
@@ -68,6 +72,8 @@ public class MovementJoystick : MonoBehaviour
                 joystickVec = Vector2.zero;
                 joystick.transform.position = joystickOriginalPos;
                 joystickBG.transform.position = joystickOriginalPos;
+                joystick.SetActive(false);
+                joystickBG.SetActive(false);
                 break;
             }
         }
