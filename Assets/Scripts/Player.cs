@@ -19,16 +19,16 @@ public class Player : MonoBehaviour
     {
         float x = Input.GetAxisRaw("Horizontal");
         float y = Input.GetAxisRaw("Vertical");
-        if (movementJoystick.joystickVec.y != 0)
-        {
-            rb.velocity =
-                new Vector2(movementJoystick.joystickVec.x * playerSpeed, movementJoystick.joystickVec.y * playerSpeed);
-        }
+        // if (movementJoystick.joystickVec.y != 0)
+        // {
+        //     rb.velocity =
+        //         new Vector2(movementJoystick.joystickVec.x * playerSpeed, movementJoystick.joystickVec.y * playerSpeed);
+        // }
 
-        else
-        {
-            rb.velocity = Vector2.zero;
-        }
+        // else
+        // {
+        //     rb.velocity = Vector2.zero;
+        // }
 
         PlayerMovementAnimation(rb.velocity.x, rb.velocity.y);
     }
