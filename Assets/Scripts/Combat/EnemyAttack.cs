@@ -15,7 +15,7 @@ public class EnemyAttack : MonoBehaviour
 
     private void Update()
     {
-        if(attackTimer > 0.0f)
+        if (attackTimer > 0.0f)
         {
             attackTimer -= Time.deltaTime;
         }
@@ -25,7 +25,6 @@ public class EnemyAttack : MonoBehaviour
             attackTimer = Random.Range(1.25f, 3f);
             StartCoroutine(Attack());
         }
-
     }
 
     IEnumerator Attack()

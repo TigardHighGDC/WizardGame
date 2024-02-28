@@ -8,7 +8,7 @@ public class PlayerHealth : MonoBehaviour
     public static PlayerHealth Instance;
     public float MaxHealth = 100.0f;
     public Slider Slider;
-    
+
     private float invincability = 0.0f;
 
     private float currentHealth;
@@ -35,7 +35,7 @@ public class PlayerHealth : MonoBehaviour
         }
         currentHealth -= damage;
         if (currentHealth <= 0.0f)
-        {   
+        {
             Slider.value = 0.0f;
             Destroy(gameObject);
         }

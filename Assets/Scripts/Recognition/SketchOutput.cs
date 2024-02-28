@@ -13,7 +13,7 @@ public class SketchOutput : MonoBehaviour
         PrimitiveContainer[] template = JsonConvert.DeserializeObject<PrimitiveContainer[]>(fileContents);
         if (Compare(sketch, template))
         {
-            foreach(GameObject gameObject in GameObject.FindGameObjectsWithTag("Enemy"))
+            foreach (GameObject gameObject in GameObject.FindGameObjectsWithTag("Enemy"))
             {
                 gameObject.GetComponent<EnemyHealth>().TakeDamage(20.0f);
             }

@@ -19,7 +19,7 @@ public class EnemyHealth : MonoBehaviour
     {
         currentHealth -= damage;
         if (currentHealth <= 0.0f)
-        {   
+        {
             Slider.value = 0.0f;
             Destroy(gameObject);
         }
