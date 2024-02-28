@@ -27,6 +27,7 @@ public class LineDrawer : MonoBehaviour
             AddPoint(currentLine, touch.position);
             break;
         case TouchPhase.Moved:
+            Debug.Log(touch.position);
             if (Vector3.Distance(AdjustPointToScreen(5, touch.position),
                                  currentLine.GetPosition(currentLine.positionCount - 1)) > 0.1f)
             {

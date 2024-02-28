@@ -7,6 +7,9 @@ TagManager:
   - Item
   - NPC
   - Quit
+  - Line
+  - Debug
+  - Enemy
   layers:
   - Default
   - TransparentFX

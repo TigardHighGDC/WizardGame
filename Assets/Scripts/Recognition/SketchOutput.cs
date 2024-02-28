@@ -13,6 +13,10 @@ public class SketchOutput : MonoBehaviour
         PrimitiveContainer[] template = JsonConvert.DeserializeObject<PrimitiveContainer[]>(fileContents);
         if (Compare(sketch, template))
         {
+            foreach(GameObject gameObject in GameObject.FindGameObjectsWithTag("Enemy"))
+            {
+                gameObject.GetComponent<EnemyHealth>().TakeDamage(20.0f);
+            }
             return "Lightning";
         }
 
@@ -21,6 +25,7 @@ public class SketchOutput : MonoBehaviour
         template = JsonConvert.DeserializeObject<PrimitiveContainer[]>(fileContents);
         if (Compare(sketch, template))
         {
+            PlayerHealth.Instance.SetInvincability(1.5f);
             return "Shield";
         }
 
