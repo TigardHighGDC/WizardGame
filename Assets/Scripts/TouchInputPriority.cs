@@ -27,8 +27,8 @@ public class TouchInputPriority : MonoBehaviour
                 // priority interactions
                 if (tag.ContainsKey("Item"))
                 {
-                   ClickOnObject speech = tag["Item"].GetComponent<ClickOnObject>();
-                   speech.StartDialogue();
+                    ClickOnObject speech = tag["Item"].GetComponent<ClickOnObject>();
+                    speech.StartDialogue();
                 }
                 else if (tag.ContainsKey("NPC"))
                 {
@@ -44,6 +44,7 @@ public class TouchInputPriority : MonoBehaviour
                 else
                 {
                     joystickStart = true;
+                    MovementJoystick.Instance.Show();
                     MovementJoystick.Instance.SetJoystick(AdjustPointToScreen(5, touch.position));
                 }
                 break;
@@ -56,10 +57,15 @@ public class TouchInputPriority : MonoBehaviour
 
             // Determine if the touch is a moving touch
             case TouchPhase.Ended:
-                joystickStart = false;
+                if (joystickStart)
+                {
+                    MovementJoystick.Instance.Hide();
+                    MovementJoystick.Instance.SetJoystickCenterPoint(MovementJoystick.Instance.transform.position);
+                    joystickStart = false;
+                }
                 break;
             }
-        }  
+        }
     }
 
     private Vector3 AdjustPointToScreen(float cameraHeight, Vector3 position)

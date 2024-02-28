@@ -19,17 +19,7 @@ public class Player : MonoBehaviour
     {
         float x = Input.GetAxisRaw("Horizontal");
         float y = Input.GetAxisRaw("Vertical");
-        // if (movementJoystick.joystickVec.y != 0)
-        // {
-        //     rb.velocity =
-        //         new Vector2(movementJoystick.joystickVec.x * playerSpeed, movementJoystick.joystickVec.y * playerSpeed);
-        // }
-
-        // else
-        // {
-        //     rb.velocity = Vector2.zero;
-        // }
-
+        rb.velocity = MovementJoystick.Instance.GetVelocity(playerSpeed);
         PlayerMovementAnimation(rb.velocity.x, rb.velocity.y);
     }
 

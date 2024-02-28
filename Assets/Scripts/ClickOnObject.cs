@@ -4,20 +4,20 @@ using UnityEngine;
 using UnityEngine.UI;
 public class ClickOnObject : MonoBehaviour
 {
-// Maybe use TextMeshProUGUI instead of Text in public Text dialogueText;
-// Maybe add using TMPro;
+    // Maybe use TextMeshProUGUI instead of Text in public Text dialogueText;
+    // Maybe add using TMPro;
 
-    //Public
+    // Public
     public GameObject dialogPanel;
     public Text dialogueText;
     public string[] dialogue;
     public float wordSpeed;
-    //Private
+    // Private
     private int index;
 
     public void StartDialogue()
     {
-       if(dialogPanel.activeInHierarchy)
+        if (dialogPanel.activeInHierarchy)
         {
             zeroText();
         }
@@ -36,7 +36,7 @@ public class ClickOnObject : MonoBehaviour
 
     IEnumerator Typing()
     {
-        foreach(char letter in dialogue[index].ToCharArray())
+        foreach (char letter in dialogue[index].ToCharArray())
         {
             dialogueText.text += letter;
             yield return new WaitForSeconds(wordSpeed);
@@ -45,7 +45,7 @@ public class ClickOnObject : MonoBehaviour
 
     public void NextLine()
     {
-        if(index < dialogue.Length - 1)
+        if (index < dialogue.Length - 1)
         {
             index++;
             dialogueText.text = "";
