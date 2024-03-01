@@ -6,109 +6,55 @@ using UnityEngine.UI;
 
 public class MovementJoystick : MonoBehaviour
 {
+    public static MovementJoystick Instance;
     public GameObject joystick;
-    public GameObject joystickBG;
-    public Vector2 joystickVec;
-
-    private Vector2 joystickTouchPos;
-    private Vector2 joystickOriginalPos;
-    private float joystickRadius;
+    public GameObject joystickCenter;
+    public float maxRadius;
 
     void Start()
     {
-        // Joystick starting position
-        joystickOriginalPos = joystickBG.transform.position;
-        joystickRadius = joystickBG.GetComponent<RectTransform>().sizeDelta.y / 4;
-        joystick.SetActive(false);
-        joystickBG.SetActive(false);
+        Instance = this;
     }
 
-    void Update() // Collider2D other
+    public void SetJoystick(Vector3 setPoint)
     {
-        if (Input.touchCount > 0)
-        {
-            Touch touch = Input.GetTouch(0);
-
-            // Handle finger movements based on TouchPhase
-            switch (touch.phase)
-            {
-            // When a touch has first been detected, change the message and record the starting position
-            case TouchPhase.Began:
-                // Record initial touch position.
-                Collider2D[] colliders = Physics2D.OverlapPointAll(AdjustPointToScreen(5, touch.position));
-                HashSet<string> tag = new HashSet<string>();
-                foreach (Collider2D collider in colliders)
-                {
-                    tag.Add(collider.gameObject.tag);
-                }
-                // priority interactions
-                if (tag.Contains("Item"))
-                {
-                    Debug.Log("Item");
-                }
-                else if (tag.Contains("NPC"))
-                {
-                    Debug.Log("NPC");
-                }
-                else if (tag.Contains("Quit"))
-                {
-                    Debug.Log("Quit");
-                    Application.Quit();
-                }
-                // if nothing clicked move joystick to touch position
-                else
-                {
-                    joystick.SetActive(true);
-                    joystickBG.SetActive(true);
-                    joystick.transform.position = touch.position;
-                    joystickBG.transform.position = touch.position;
-                    joystickTouchPos = touch.position;
-                }
-                break;
-
-            // Determine if the touch is a moving touch
-            case TouchPhase.Ended:
-                // Report that the touch has ended when it ends
-                joystickVec = Vector2.zero;
-                joystick.transform.position = joystickOriginalPos;
-                joystickBG.transform.position = joystickOriginalPos;
-                joystick.SetActive(false);
-                joystickBG.SetActive(false);
-                break;
-            }
-        }
+        joystick.transform.position = setPoint;
     }
 
-    // for the draging
-    public void Drag(BaseEventData baseEventData)
+    public void SetJoystickCenterPoint(Vector3 setPoint)
     {
-        PointerEventData pointerEventData = baseEventData as PointerEventData;
-        Vector2 dragPos = pointerEventData.position;
-        joystickVec = (dragPos - joystickTouchPos).normalized;
-
-        float joystickDist = Vector2.Distance(dragPos, joystickTouchPos);
-
-        if (joystickDist < joystickRadius)
+        if (maxRadius < Vector3.Distance(setPoint, joystick.transform.position))
         {
-            joystick.transform.position = joystickTouchPos + joystickVec * joystickDist;
+            Vector3 offset = setPoint - joystick.transform.position;
+            offset.Normalize();
+            offset.x *= maxRadius;
+            offset.y *= maxRadius;
+            joystickCenter.transform.position = this.transform.position + offset;
         }
-
         else
         {
-            joystick.transform.position = joystickTouchPos + joystickVec * joystickRadius;
+            joystickCenter.transform.position = setPoint;
         }
     }
 
-    private Vector3 AdjustPointToScreen(float cameraHeight, Vector3 position)
+    public Vector3 GetVelocity(float maxSpeed)
     {
-        // Center the point to the screen
-        position.x = position.x - (Screen.width / 2f);
-        position.y = position.y - (Screen.height / 2f);
+        Vector3 offset = joystickCenter.transform.position - joystick.transform.position;
+        offset.Normalize();
+        float speed =
+            maxSpeed * (Vector3.Distance(joystick.transform.position, joystickCenter.transform.position) / maxRadius);
+        return offset * speed;
+    }
 
-        // Adjust the point to the camera
-        position.x = (position.x / Screen.width) * cameraHeight * (Screen.width / (float)Screen.height) * 2f;
-        position.y = (position.y / Screen.height) * cameraHeight * 2f;
+    public void Show()
+    {
+        joystick.GetComponent<SpriteRenderer>().enabled = true;
+        joystickCenter.GetComponent<SpriteRenderer>().enabled = true;
+    }
 
-        return position;
+    public void Hide()
+    {
+        joystick.GetComponent<SpriteRenderer>().enabled = false;
+        joystickCenter.GetComponent<SpriteRenderer>().enabled = false;
     }
 }

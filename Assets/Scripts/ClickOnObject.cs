@@ -2,53 +2,58 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
 public class ClickOnObject : MonoBehaviour
 {
-    void OnMouseOver()
+    // Maybe use TextMeshProUGUI instead of Text in public Text dialogueText;
+    // Maybe add using TMPro;
+
+    // Public
+    public GameObject dialogPanel;
+    public Text dialogueText;
+    public string[] dialogue;
+    public float wordSpeed;
+    // Private
+    private int index;
+
+    public void StartDialogue()
     {
-        if (Input.touchCount > 0)
+        if (dialogPanel.activeInHierarchy)
         {
-            Touch touch = Input.GetTouch(0);
-
-            // Handle finger movements based on TouchPhase
-            switch (touch.phase)
-            {
-            // When a touch has first been detected, change the message and record the starting position
-            case TouchPhase.Began:
-                // Record initial touch position.
-                Debug.Log("Word");
-                break;
-
-            // Determine if the touch is a moving touch
-            case TouchPhase.Ended:
-                // Report that the touch has ended when it ends
-                Debug.Log("Bye bye");
-                break;
-            }
+            zeroText();
+        }
+        else
+        {
+            dialogPanel.SetActive(true);
+            StartCoroutine(Typing());
         }
     }
-    // void Update()
-    // {
-    //     if (Input.touchCount > 0)
-    //     {
-    //         Touch touch = Input.GetTouch(0);
+    public void zeroText()
+    {
+        dialogueText.text = "";
+        index = 0;
+        dialogPanel.SetActive(false);
+    }
 
-    //         // Handle finger movements based on TouchPhase
-    //         switch (touch.phase)
-    //         {
-    //             //When a touch has first been detected, change the message and record the starting position
-    //             case TouchPhase.Began:
-    //                 // Record initial touch position.
-    //                 Debug.Log("Word");
-    //                 break;
+    IEnumerator Typing()
+    {
+        foreach (char letter in dialogue[index].ToCharArray())
+        {
+            dialogueText.text += letter;
+            yield return new WaitForSeconds(wordSpeed);
+        }
+    }
 
-    //             //Determine if the touch is a moving touch
-    //             case TouchPhase.Ended:
-    //                 // Report that the touch has ended when it ends
-    //                 Debug.Log("Bye bye");
-    //                 break;
-    //         }
-    //     }
-    // }
+    public void NextLine()
+    {
+        if (index < dialogue.Length - 1)
+        {
+            index++;
+            dialogueText.text = "";
+            StartCoroutine(Typing());
+        }
+        else
+        {
+            zeroText();
+        }
+    }
 }
