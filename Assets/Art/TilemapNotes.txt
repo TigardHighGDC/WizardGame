@@ -1,0 +1,5 @@
+tile map is currently 500(horizontal)x200(vertical)
+
+main path = 6 tiles
+side paths = 4 tiles
+other = 3 tiles
