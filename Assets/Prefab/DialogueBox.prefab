@@ -146,7 +146,7 @@ GameObject:
   - component: {fileID: 8970397008321574444}
   - component: {fileID: 7123396585752419661}
   m_Layer: 5
-  m_Name: Image
+  m_Name: NPCSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -221,6 +221,7 @@ GameObject:
   - component: {fileID: 7224972473091506057}
   - component: {fileID: 7942709170677049578}
   - component: {fileID: 6224561761380277443}
+  - component: {fileID: 3712575948289407574}
   m_Layer: 5
   m_Name: DialogueBox
   m_TagString: Untagged
@@ -313,6 +314,22 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &3712575948289407574
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5958553627423402925}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94330a46eb2b5ff41b0813dae0854f9b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textDisplay: {fileID: 5153060041340493649}
+  CharacterSprite: {fileID: 7123396585752419661}
+  Dialogue: []
+  IsTalking: 0
 --- !u!1 &7122189860633975673
 GameObject:
   m_ObjectHideFlags: 0
