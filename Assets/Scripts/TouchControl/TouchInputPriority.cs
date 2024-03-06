@@ -17,8 +17,15 @@ public class TouchInputPriority : MonoBehaviour
             {
             // When a touch has first been detected, change the message and record the starting position
             case TouchPhase.Began:
-                // Record initial touch position.
-                Collider2D[] colliders = Physics2D.OverlapPointAll(AdjustPointToScreen(5, touch.position));
+
+                if (DialogueBox.Instance.IsTalking)
+                {
+                    DialogueBox.Instance.NextParagraph();
+                    break;
+                }
+                // Adds camera position to the touch position
+                Collider2D[] colliders =
+                    Physics2D.OverlapPointAll(AdjustPointToScreen(5, touch.position) + transform.position);
                 Dictionary<string, GameObject> tag = new Dictionary<string, GameObject>();
                 foreach (Collider2D collider in colliders)
                 {
@@ -27,13 +34,12 @@ public class TouchInputPriority : MonoBehaviour
                 // priority interactions
                 if (tag.ContainsKey("Item"))
                 {
-                    ClickOnObject speech = tag["Item"].GetComponent<ClickOnObject>();
-                    speech.StartDialogue();
+                    break;
                 }
                 else if (tag.ContainsKey("NPC"))
                 {
-                    ClickOnObject speech = tag["NPC"].GetComponent<ClickOnObject>();
-                    speech.StartDialogue();
+                    DialogueStorage speech = tag["NPC"].GetComponent<DialogueStorage>();
+                    DialogueBox.Instance.StartDialogue(speech.Dialogue, speech.Sprite);
                 }
                 else if (tag.ContainsKey("Quit"))
                 {
@@ -45,7 +51,9 @@ public class TouchInputPriority : MonoBehaviour
                 {
                     joystickStart = true;
                     MovementJoystick.Instance.Show();
-                    MovementJoystick.Instance.SetJoystick(AdjustPointToScreen(5, touch.position));
+                    Vector3 position = AdjustPointToScreen(5, touch.position);
+                    MovementJoystick.Instance.SetJoystick(position);
+                    MovementJoystick.Instance.SetJoystickCenterPoint(position);
                 }
                 break;
             case TouchPhase.Moved:
@@ -59,8 +67,9 @@ public class TouchInputPriority : MonoBehaviour
             case TouchPhase.Ended:
                 if (joystickStart)
                 {
+                    MovementJoystick.Instance.SetJoystickCenterPoint(
+                        MovementJoystick.Instance.joystick.transform.localPosition);
                     MovementJoystick.Instance.Hide();
-                    MovementJoystick.Instance.SetJoystickCenterPoint(MovementJoystick.Instance.transform.position);
                     joystickStart = false;
                 }
                 break;

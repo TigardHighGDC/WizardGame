@@ -18,22 +18,22 @@ public class MovementJoystick : MonoBehaviour
 
     public void SetJoystick(Vector3 setPoint)
     {
-        joystick.transform.position = setPoint;
+        joystick.transform.localPosition = setPoint;
     }
 
     public void SetJoystickCenterPoint(Vector3 setPoint)
     {
-        if (maxRadius < Vector3.Distance(setPoint, joystick.transform.position))
+        if (maxRadius < Vector3.Distance(setPoint, joystick.transform.localPosition))
         {
-            Vector3 offset = setPoint - joystick.transform.position;
+            Vector3 offset = setPoint - joystick.transform.localPosition;
             offset.Normalize();
             offset.x *= maxRadius;
             offset.y *= maxRadius;
-            joystickCenter.transform.position = this.transform.position + offset;
+            joystickCenter.transform.localPosition = offset + joystick.transform.localPosition;
         }
         else
         {
-            joystickCenter.transform.position = setPoint;
+            joystickCenter.transform.localPosition = setPoint;
         }
     }
 
