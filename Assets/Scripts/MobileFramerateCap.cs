@@ -6,6 +6,6 @@ public class MobileFramerateCap : MonoBehaviour
 {
     void Start()
     {
-        Application.targetFrameRate = 60;
+        Application.targetFrameRate = 90;
     }
 }
