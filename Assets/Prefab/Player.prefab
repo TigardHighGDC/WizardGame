@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5024368335593178846}
   - component: {fileID: 4671547496591232687}
   - component: {fileID: 7575675075389012443}
-  - component: {fileID: 6185147335275167635}
+  - component: {fileID: 1382186988370103190}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -78,8 +78,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
+  m_SortingOrder: 3
+  m_Sprite: {fileID: 1619796845, guid: 8049feec81578884bbdc0bd8c056a816, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -166,7 +166,7 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
---- !u!95 &6185147335275167635
+--- !u!95 &1382186988370103190
 Animator:
   serializedVersion: 5
   m_ObjectHideFlags: 0
@@ -320,6 +320,14 @@ PrefabInstance:
     - target: {fileID: 20783665891764350, guid: 2b62d7024c11e9041809475e99e5d50e, type: 3}
       propertyPath: m_Name
       value: Joystick
+      objectReference: {fileID: 0}
+    - target: {fileID: 502151953226229337, guid: 2b62d7024c11e9041809475e99e5d50e, type: 3}
+      propertyPath: m_SortingOrder
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1399407414747287839, guid: 2b62d7024c11e9041809475e99e5d50e, type: 3}
+      propertyPath: m_SortingOrder
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7318915209659135382, guid: 2b62d7024c11e9041809475e99e5d50e, type: 3}
       propertyPath: m_LocalPosition.x
