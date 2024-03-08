@@ -42,7 +42,7 @@ public class SketchOutput : MonoBehaviour
 
     public static bool Compare(PrimitiveContainer[] sketch, PrimitiveContainer[] template, float threshold = 0.25f)
     {
-        float sizeCheck = (1.0f / template.Length) * 0.2f;
+        float sizeCheck = (1.0f / template.Length) * 0.3f;
         int u = 0;
         bool? concaveReverse = null;
 
