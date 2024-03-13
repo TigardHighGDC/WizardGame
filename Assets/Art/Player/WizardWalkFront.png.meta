@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 8049feec81578884bbdc0bd8c056a816
+guid: 17dcccc741fda764baf10056941e2f70
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -34,7 +34,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -81,6 +81,19 @@ TextureImporter:
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
     buildTarget: Standalone
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -94,7 +107,33 @@ TextureImporter:
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
-    buildTarget: Server
+    buildTarget: iPhone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Windows Store Apps
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -110,13 +149,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: PHWizardWalkFront_0
+      name: WizardWalkFront_0
       rect:
         serializedVersion: 2
-        x: 3
-        y: 206
-        width: 90
-        height: 173
+        x: 0
+        y: 200
+        width: 100
+        height: 200
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -124,20 +163,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a310633453f36114d9bb7f2e3200c64d
-      internalID: 1619796845
+      spriteID: a67b5304ae3cb2048922c1ed9330fb34
+      internalID: -506238327
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PHWizardWalkFront_1
+      name: WizardWalkFront_1
       rect:
         serializedVersion: 2
-        x: 104
-        y: 206
-        width: 89
-        height: 173
+        x: 100
+        y: 200
+        width: 100
+        height: 200
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -145,20 +184,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9c930496cb849e44db429ea9807b09c3
-      internalID: -951461984
+      spriteID: 11c7d304e6915c8498d5f0a509285d3b
+      internalID: -1308456298
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PHWizardWalkFront_2
+      name: WizardWalkFront_2
       rect:
         serializedVersion: 2
-        x: 3
-        y: 7
-        width: 90
-        height: 172
+        x: 0
+        y: 0
+        width: 100
+        height: 200
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -166,8 +205,29 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cdec4ec4072e631418aa6cc3484c690b
-      internalID: 2058780237
+      spriteID: ca281d7c446da9d48a68b540d0a11d8d
+      internalID: -1826767747
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WizardWalkFront_3
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 0
+        width: 100
+        height: 200
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4dd4c7cdb63317e4f826a93e0dcc1868
+      internalID: -928452564
       vertices: []
       indices: 
       edges: []
@@ -183,9 +243,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      PHWizardWalkFront_0: 1619796845
-      PHWizardWalkFront_1: -951461984
-      PHWizardWalkFront_2: 2058780237
+      WizardWalkFront_0: -506238327
+      WizardWalkFront_1: -1308456298
+      WizardWalkFront_2: -1826767747
+      WizardWalkFront_3: -928452564
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
