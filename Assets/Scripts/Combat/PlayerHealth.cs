@@ -8,6 +8,7 @@ public class PlayerHealth : MonoBehaviour
     public static PlayerHealth Instance;
     public float MaxHealth = 100.0f;
     public Slider Slider;
+    public Image Shield;
 
     private float invincability = 0.0f;
 
@@ -21,8 +22,10 @@ public class PlayerHealth : MonoBehaviour
 
     private void Update()
     {
+        Shield.enabled = false;
         if (invincability > 0.0f)
         {
+            Shield.enabled = true;
             invincability -= Time.deltaTime;
         }
     }
