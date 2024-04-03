@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: cebb1b5e9fc5e184e9991de5a8e400a4
+guid: a7afc40efad6c704f84905bf805611ed
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -106,17 +106,69 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: iPhone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Windows Store Apps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: PHWizardWalkBehind_0
+      name: PHWizardWalkLeft_0
       rect:
         serializedVersion: 2
         x: 7
-        y: 206
-        width: 90
-        height: 173
+        y: 203
+        width: 89
+        height: 176
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -124,20 +176,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 164c70fe06ded1c4eb1d33e9a5081cb0
-      internalID: -1398476687
+      spriteID: 91a30cda6a07d734a8b6dd7ef3f8a41a
+      internalID: 1923717398
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PHWizardWalkBehind_1
+      name: PHWizardWalkLeft_1
       rect:
         serializedVersion: 2
         x: 107
-        y: 206
+        y: 203
         width: 89
-        height: 173
+        height: 176
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -145,20 +197,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3e706c5aa3f184348849d899ebf4363e
-      internalID: -1446524957
+      spriteID: 28f033cd31639e94e8290467e9374ff6
+      internalID: 1652538017
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PHWizardWalkBehind_2
+      name: PHWizardWalkLeft_2
       rect:
         serializedVersion: 2
         x: 7
-        y: 7
-        width: 90
-        height: 172
+        y: 0
+        width: 89
+        height: 179
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -166,8 +218,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3098475662c53af41be189cdf363c91f
-      internalID: 436164787
+      spriteID: d7e13dbe24195a54dbef12be6b8b7335
+      internalID: 948074188
       vertices: []
       indices: 
       edges: []
@@ -183,9 +235,9 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      PHWizardWalkBehind_0: -1398476687
-      PHWizardWalkBehind_1: -1446524957
-      PHWizardWalkBehind_2: 436164787
+      PHWizardWalkLeft_0: 1923717398
+      PHWizardWalkLeft_1: 1652538017
+      PHWizardWalkLeft_2: 948074188
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
