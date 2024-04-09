@@ -6,14 +6,18 @@ using UnityEngine.UI;
 public class EnemyHealth : MonoBehaviour
 {
     public float MaxHealth = 100.0f;
+    public float invincabilityReduction = 0.25f;
     public Slider Slider;
     public GameObject FireParticles;
     public GameObject LightningParticles;
     public GameObject WaterParticles;
-    
     public float fireTimer = 0.0f;
     public float lightningTimer = 0.0f;
     public float waterTimer = 0.0f;
+
+    [HideInInspector]
+    public bool isInvicable;
+
     private float currentHealth;
 
     private void Start()
@@ -46,6 +50,10 @@ public class EnemyHealth : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
+        if (isInvicable)
+        {
+            damage = damage * invincabilityReduction;
+        }
         currentHealth -= damage;
         if (currentHealth <= 0.0f)
         {

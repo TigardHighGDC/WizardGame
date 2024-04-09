@@ -44,7 +44,7 @@ public class SketchOutput : MonoBehaviour
             }
             return "Fire";
         }
-        
+
         filePath = Application.dataPath + "/Templates/Lightning.json";
         fileContents = File.ReadAllText(filePath);
         template = JsonConvert.DeserializeObject<PrimitiveContainer[]>(fileContents);
