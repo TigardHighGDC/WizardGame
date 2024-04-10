@@ -1,0 +1,23 @@
+[
+  {
+    "Type": 0,
+    "Rotation": 0.0,
+    "Length": 0.457411557,
+    "ConcaveUp": false,
+    "Completeness": 0.0
+  },
+  {
+    "Type": 0,
+    "Rotation": 3.90409064,
+    "Length": 0.3343333,
+    "ConcaveUp": false,
+    "Completeness": 0.0
+  },
+  {
+    "Type": 1,
+    "Rotation": 1.798421,
+    "Length": 0.208255142,
+    "ConcaveUp": true,
+    "Completeness": 0.408551544
+  }
+]
