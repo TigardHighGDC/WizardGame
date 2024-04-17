@@ -25,7 +25,7 @@ public class TouchInputPriority : MonoBehaviour
                 }
                 // Adds camera position to the touch position
                 Collider2D[] colliders =
-                    Physics2D.OverlapPointAll(AdjustPointToScreen(5, touch.position) + transform.position);
+                    Physics2D.OverlapPointAll(AdjustPointToScreen(8, touch.position) + transform.position);
                 Dictionary<string, GameObject> tag = new Dictionary<string, GameObject>();
                 foreach (Collider2D collider in colliders)
                 {
@@ -51,7 +51,7 @@ public class TouchInputPriority : MonoBehaviour
                 {
                     joystickStart = true;
                     MovementJoystick.Instance.Show();
-                    Vector3 position = AdjustPointToScreen(5, touch.position);
+                    Vector3 position = AdjustPointToScreen(8, touch.position);
                     MovementJoystick.Instance.SetJoystick(position);
                     MovementJoystick.Instance.SetJoystickCenterPoint(position);
                 }
@@ -59,7 +59,7 @@ public class TouchInputPriority : MonoBehaviour
             case TouchPhase.Moved:
                 if (joystickStart)
                 {
-                    MovementJoystick.Instance.SetJoystickCenterPoint(AdjustPointToScreen(5, touch.position));
+                    MovementJoystick.Instance.SetJoystickCenterPoint(AdjustPointToScreen(8, touch.position));
                 }
                 break;
 
