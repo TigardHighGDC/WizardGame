@@ -126,15 +126,16 @@ public class SketchOutput : MonoBehaviour
     }
 
     // Spell Raw Data
-    public static PrimitiveContainer[] fire = {new PrimitiveContainer(0, 0.0f, 0.457411557f, false, 0.0f),
-                             new PrimitiveContainer(0, 3.90409064f, 0.3343333f, false, 0.0f),
-                             new PrimitiveContainer(1, 1.798421f, 0.208255142f, true, 0.408551544f)};
-    public static PrimitiveContainer[] lightning = {new PrimitiveContainer(0, 0.0f, 0.4076188f, false, 0.0f), 
-                            new PrimitiveContainer(0, 2.40771317f, 0.368411481f, false, 0.0f), 
-                            new PrimitiveContainer(0, 6.26135445f, 0.223969668f, false, 0.0f)};
-    public static PrimitiveContainer[] shield = {new PrimitiveContainer(1, 0.0f, 1.0f, false, 1.0f)};
-    public static PrimitiveContainer[] water = {new PrimitiveContainer(1, 0.0f, 0.5047563f, true, 0.8546553f), 
-                              new PrimitiveContainer(1, 0.5974314f, 0.495243728f, true, 0.505029261f)};
-
-
+    public static PrimitiveContainer[] fire = { new PrimitiveContainer(0, 0.0f, 0.457411557f, false, 0.0f),
+                                                new PrimitiveContainer(0, 3.90409064f, 0.3343333f, false, 0.0f),
+                                                new PrimitiveContainer(1, 1.798421f, 0.208255142f, true,
+                                                                       0.408551544f) };
+    public static PrimitiveContainer[] lightning = { new PrimitiveContainer(0, 0.0f, 0.4076188f, false, 0.0f),
+                                                     new PrimitiveContainer(0, 2.40771317f, 0.368411481f, false, 0.0f),
+                                                     new PrimitiveContainer(0, 6.26135445f, 0.223969668f, false,
+                                                                            0.0f) };
+    public static PrimitiveContainer[] shield = { new PrimitiveContainer(1, 0.0f, 1.0f, false, 1.0f) };
+    public static PrimitiveContainer[] water = { new PrimitiveContainer(1, 0.0f, 0.5047563f, true, 0.8546553f),
+                                                 new PrimitiveContainer(1, 0.5974314f, 0.495243728f, true,
+                                                                        0.505029261f) };
 }
