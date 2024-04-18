@@ -4,12 +4,23 @@ using UnityEngine;
 
 public class PrimitiveContainer
 {
+    // Constructor
+    public PrimitiveContainer(int type = 0, float rotation = 0f, float length = 0.0f, bool concaveUp = false,
+                              float completeness = 0.0f)
+    {
+        Type = type;
+        Rotation = rotation;
+        Length = length;
+        ConcaveUp = concaveUp;
+        Completeness = completeness;
+    }
+
     // General
-    public int Type = 0;          // 0 = Line, 1 = Arc
-    public float Rotation = 0.0f; // Rotation of the primitive
-    public float Length = 0.0f;   // Length of the primitive
+    public int Type;       // 0 = Line, 1 = Arc
+    public float Rotation; // Rotation of the primitive
+    public float Length;   // Length of the primitive
 
     // Arc/Circle Specific
-    public bool ConcaveUp = false;    // Whether the arc is concave up or down
-    public float Completeness = 0.0f; // How much of the circle is drawn
+    public bool ConcaveUp;     // Whether the arc is concave up or down
+    public float Completeness; // How much of the circle is drawn
 }
