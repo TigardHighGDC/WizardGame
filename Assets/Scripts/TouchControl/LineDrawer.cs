@@ -27,49 +27,15 @@ public class LineDrawer : MonoBehaviour
             AddPoint(currentLine, touch.position);
             break;
         case TouchPhase.Moved:
-            Debug.Log(touch.position);
             if (Vector3.Distance(AdjustPointToScreen(5, touch.position),
                                  currentLine.GetPosition(currentLine.positionCount - 1)) > 0.1f)
             {
                 AddPoint(currentLine, touch.position);
             }
-
-            // RecognizerDebuger.Instance.DeleteDebug();
-
-            Vector3[] points = new Vector3[currentLine.positionCount];
-            currentLine.GetPositions(points);
-
-            // float[] direction = PreRecognition.DirectionChangeCalculator(points);
-            // float[] curvature = PreRecognition.CurvatureCalculator(points, direction);
-            // int[] corners = PreRecognition.CornerCalculator(points, PreRecognition.LineLengthCalculator(points),
-            // curvature);
-
-            // foreach (int corner in corners)
-            // {
-            //     Vector3 cornerPosition = points[corner];
-            //     RecognizerDebuger.Instance.CornerDebuger(cornerPosition);
-            // }
-
-            // PrimitiveContainer[] primitives = HighLevelRecognition.PrimitiveShapeGenerator(points);
-            // string primOutput = "Primitives: ";
-            // foreach(PrimitiveContainer p in primitives)
-            // {
-            //     if (p.Type == 0)
-            //     {
-            //         primOutput = primOutput + ", Line";
-            //     }
-            //     else
-            //     {
-            //         primOutput = primOutput + ", Arc";
-            //     }
-            // }
-            // Debug.Log(primOutput);
             break;
         case TouchPhase.Ended:
-
             Vector3[] points2 = new Vector3[currentLine.positionCount];
             currentLine.GetPositions(points2);
-            // TemplateCreator.Instance.AddJSON(HighLevelRecognition.PrimitiveShapeGenerator(points2));
             PrimitiveContainer[] primitives = HighLevelRecognition.PrimitiveShapeGenerator(points2);
             Debug.Log(SketchOutput.Output(primitives));
             currentLine.positionCount = 0;
