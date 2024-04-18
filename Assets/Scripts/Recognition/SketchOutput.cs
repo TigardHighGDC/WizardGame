@@ -8,41 +8,45 @@ public class SketchOutput : MonoBehaviour
 {
     public static string Output(PrimitiveContainer[] sketch)
     {
-        string filePath = Application.dataPath + "/Templates/Lightning.json";
-        string fileContents = File.ReadAllText(filePath);
-        PrimitiveContainer[] template = JsonConvert.DeserializeObject<PrimitiveContainer[]>(fileContents);
-        if (Compare(sketch, template))
-        {
-            foreach (GameObject gameObject in GameObject.FindGameObjectsWithTag("Enemy"))
-            {
-                gameObject.GetComponent<EnemyHealth>().TakeDamage(20.0f);
-            }
-            return "Lightning";
-        }
-
-        filePath = Application.dataPath + "/Templates/Shield.json";
-        fileContents = File.ReadAllText(filePath);
-        template = JsonConvert.DeserializeObject<PrimitiveContainer[]>(fileContents);
-        if (Compare(sketch, template))
+        if (Compare(sketch, shield))
         {
             PlayerHealth.Instance.SetInvincability(1.5f);
             return "Shield";
         }
 
-        filePath = Application.dataPath + "/Templates/Water.json";
-        fileContents = File.ReadAllText(filePath);
-        template = JsonConvert.DeserializeObject<PrimitiveContainer[]>(fileContents);
-        if (Compare(sketch, template))
+        if (Compare(sketch, water))
         {
+            foreach (GameObject gameObject in GameObject.FindGameObjectsWithTag("Enemy"))
+            {
+                gameObject.GetComponent<EnemyHealth>().ApplyWater();
+            }
             return "Water";
+        }
+
+        if (Compare(sketch, fire))
+        {
+            foreach (GameObject gameObject in GameObject.FindGameObjectsWithTag("Enemy"))
+            {
+                gameObject.GetComponent<EnemyHealth>().ApplyFire();
+            }
+            return "Fire";
+        }
+
+        if (Compare(sketch, lightning))
+        {
+            foreach (GameObject gameObject in GameObject.FindGameObjectsWithTag("Enemy"))
+            {
+                gameObject.GetComponent<EnemyHealth>().ApplyLightning();
+            }
+            return "Lightning";
         }
 
         return "None";
     }
 
-    public static bool Compare(PrimitiveContainer[] sketch, PrimitiveContainer[] template, float threshold = 0.25f)
+    public static bool Compare(PrimitiveContainer[] sketch, PrimitiveContainer[] template, float threshold = 0.4f)
     {
-        float sizeCheck = (1.0f / template.Length) * 0.2f;
+        float sizeCheck = (1.0f / template.Length) * 0.3f;
         int u = 0;
         bool? concaveReverse = null;
 
@@ -120,4 +124,18 @@ public class SketchOutput : MonoBehaviour
 
         return false;
     }
+
+    // Spell Raw Data
+    public static PrimitiveContainer[] fire = { new PrimitiveContainer(0, 0.0f, 0.457411557f, false, 0.0f),
+                                                new PrimitiveContainer(0, 3.90409064f, 0.3343333f, false, 0.0f),
+                                                new PrimitiveContainer(1, 1.798421f, 0.208255142f, true,
+                                                                       0.408551544f) };
+    public static PrimitiveContainer[] lightning = { new PrimitiveContainer(0, 0.0f, 0.4076188f, false, 0.0f),
+                                                     new PrimitiveContainer(0, 2.40771317f, 0.368411481f, false, 0.0f),
+                                                     new PrimitiveContainer(0, 6.26135445f, 0.223969668f, false,
+                                                                            0.0f) };
+    public static PrimitiveContainer[] shield = { new PrimitiveContainer(1, 0.0f, 1.0f, false, 1.0f) };
+    public static PrimitiveContainer[] water = { new PrimitiveContainer(1, 0.0f, 0.5047563f, true, 0.8546553f),
+                                                 new PrimitiveContainer(1, 0.5974314f, 0.495243728f, true,
+                                                                        0.505029261f) };
 }
