@@ -9,7 +9,8 @@ public class LineDrawer : MonoBehaviour
 
     private bool findTouch = true;
     private LineRenderer currentLine;
-    private Touch touch;
+    private int touchIndex = -1;
+    private int touchId = -1;
 
     private void Start()
     {
@@ -24,11 +25,13 @@ public class LineDrawer : MonoBehaviour
         }
         if (findTouch)
         {
+            touchIndex = -1;
             for (int i = 0; i < Input.touchCount; i++)
             {
-                if (Input.GetTouch(i).phase == TouchPhase.Began && AdjustPointToScreen(8, Input.GetTouch(i).position).x > 0.0f)
+                if (Input.GetTouch(i).phase == TouchPhase.Began &&
+                    AdjustPointToScreen(8, Input.GetTouch(i).position).x > 0.0f)
                 {
-                    touch = Input.GetTouch(i);
+                    touchId = Input.GetTouch(i).fingerId;
                     findTouch = false;
                     break;
                 }
@@ -39,7 +42,17 @@ public class LineDrawer : MonoBehaviour
             return;
         }
 
-        
+        for (int i = 0; i < Input.touchCount; i++)
+        {
+            if (Input.GetTouch(i).fingerId == touchId)
+            {
+                touchIndex = i;
+                break;
+            }
+        }
+
+        Touch touch = Input.GetTouch(touchIndex);
+
         switch (touch.phase)
         {
         case TouchPhase.Began:

@@ -7,20 +7,24 @@ public class TouchInputPriority : MonoBehaviour
     public bool FightMode = false;
 
     private bool joystickStart = false;
-    private Touch touch;
+    private int touchId = -1;
+    private int touchIndex = -1;
     private bool findTouch = true;
     // Update is called once per frame
     void Update()
     {
         if (Input.touchCount > 0)
         {
+            Debug.Log(touchIndex);
             if (findTouch)
             {
+                touchIndex = -1;
                 for (int i = 0; i < Input.touchCount; i++)
                 {
-                    if (Input.GetTouch(i).phase == TouchPhase.Began && (AdjustPointToScreen(8, Input.GetTouch(i).position).x < 0.0f || !FightMode))
+                    if (Input.GetTouch(i).phase == TouchPhase.Began &&
+                        (AdjustPointToScreen(8, Input.GetTouch(i).position).x < 0.0f || !FightMode))
                     {
-                        touch = Input.GetTouch(i);
+                        touchId = Input.GetTouch(i).fingerId;
                         findTouch = false;
                         break;
                     }
@@ -30,6 +34,17 @@ public class TouchInputPriority : MonoBehaviour
             {
                 return;
             }
+
+            for (int i = 0; i < Input.touchCount; i++)
+            {
+                if (Input.GetTouch(i).fingerId == touchId)
+                {
+                    touchIndex = i;
+                    break;
+                }
+            }
+
+            Touch touch = Input.GetTouch(touchIndex);
             // Handle finger movements based on TouchPhase
             switch (touch.phase)
             {
@@ -92,7 +107,6 @@ public class TouchInputPriority : MonoBehaviour
                 }
                 findTouch = true;
                 break;
-            
 
             case TouchPhase.Canceled:
                 if (joystickStart)
