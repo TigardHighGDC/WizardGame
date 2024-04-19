@@ -4,9 +4,12 @@ using UnityEngine;
 
 public class LineDrawer : MonoBehaviour
 {
+    public bool FightMode = false;
     public GameObject debugObject;
 
+    private bool findTouch = true;
     private LineRenderer currentLine;
+    private Touch touch;
 
     private void Start()
     {
@@ -15,19 +18,35 @@ public class LineDrawer : MonoBehaviour
 
     private void Update()
     {
-        if (Input.touchCount == 0)
+        if (Input.touchCount == 0 || !FightMode)
+        {
+            return;
+        }
+        if (findTouch)
+        {
+            for (int i = 0; i < Input.touchCount; i++)
+            {
+                if (Input.GetTouch(i).phase == TouchPhase.Began && AdjustPointToScreen(8, Input.GetTouch(i).position).x > 0.0f)
+                {
+                    touch = Input.GetTouch(i);
+                    findTouch = false;
+                    break;
+                }
+            }
+        }
+        if (findTouch)
         {
             return;
         }
 
-        Touch touch = Input.GetTouch(0);
+        
         switch (touch.phase)
         {
         case TouchPhase.Began:
             AddPoint(currentLine, touch.position);
             break;
         case TouchPhase.Moved:
-            if (Vector3.Distance(AdjustPointToScreen(5, touch.position),
+            if (Vector3.Distance(AdjustPointToScreen(8, touch.position),
                                  currentLine.GetPosition(currentLine.positionCount - 1)) > 0.1f)
             {
                 AddPoint(currentLine, touch.position);
@@ -39,10 +58,12 @@ public class LineDrawer : MonoBehaviour
             PrimitiveContainer[] primitives = HighLevelRecognition.PrimitiveShapeGenerator(points2);
             Debug.Log(SketchOutput.Output(primitives));
             currentLine.positionCount = 0;
+            findTouch = true;
             break;
         case TouchPhase.Canceled:
             // ShapeRecognition.Calculate();
             currentLine.positionCount = 0;
+            findTouch = true;
             break;
         }
     }
@@ -61,7 +82,7 @@ public class LineDrawer : MonoBehaviour
     private void AddPoint(LineRenderer lineRenderer, Vector3 position)
     {
         lineRenderer.positionCount++;
-        lineRenderer.SetPosition(lineRenderer.positionCount - 1, AdjustPointToScreen(5, position));
+        lineRenderer.SetPosition(lineRenderer.positionCount - 1, AdjustPointToScreen(8, position));
     }
 
     private Vector3 AdjustPointToScreen(float cameraHeight, Vector3 position)

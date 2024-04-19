@@ -4,14 +4,32 @@ using UnityEngine;
 
 public class TouchInputPriority : MonoBehaviour
 {
+    public bool FightMode = false;
+
     private bool joystickStart = false;
+    private Touch touch;
+    private bool findTouch = true;
     // Update is called once per frame
     void Update()
     {
         if (Input.touchCount > 0)
         {
-            Touch touch = Input.GetTouch(0);
-
+            if (findTouch)
+            {
+                for (int i = 0; i < Input.touchCount; i++)
+                {
+                    if (Input.GetTouch(i).phase == TouchPhase.Began && (AdjustPointToScreen(8, Input.GetTouch(i).position).x < 0.0f || !FightMode))
+                    {
+                        touch = Input.GetTouch(i);
+                        findTouch = false;
+                        break;
+                    }
+                }
+            }
+            if (findTouch)
+            {
+                return;
+            }
             // Handle finger movements based on TouchPhase
             switch (touch.phase)
             {
@@ -72,6 +90,19 @@ public class TouchInputPriority : MonoBehaviour
                     MovementJoystick.Instance.Hide();
                     joystickStart = false;
                 }
+                findTouch = true;
+                break;
+            
+
+            case TouchPhase.Canceled:
+                if (joystickStart)
+                {
+                    MovementJoystick.Instance.SetJoystickCenterPoint(
+                        MovementJoystick.Instance.joystick.transform.localPosition);
+                    MovementJoystick.Instance.Hide();
+                    joystickStart = false;
+                }
+                findTouch = true;
                 break;
             }
         }
