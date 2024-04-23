@@ -7,6 +7,7 @@ public class LineDrawer : MonoBehaviour
     public bool FightMode = false;
     public GameObject debugObject;
 
+    private string spellStorage = "";
     private bool findTouch = true;
     private LineRenderer currentLine;
     private int touchIndex = -1;
@@ -15,6 +16,8 @@ public class LineDrawer : MonoBehaviour
     private void Start()
     {
         currentLine = GetComponent<LineRenderer>();
+        Debug.Log("LineRenderer: " + currentLine);
+        DirectionJoystick.Instance.Hide();
     }
 
     private void Update()
@@ -23,6 +26,8 @@ public class LineDrawer : MonoBehaviour
         {
             return;
         }
+
+        // Find a new touch object that has just been created
         if (findTouch)
         {
             touchIndex = -1;
@@ -53,6 +58,12 @@ public class LineDrawer : MonoBehaviour
 
         Touch touch = Input.GetTouch(touchIndex);
 
+        if (spellStorage != "")
+        {
+            SpellCast(touch);
+            return;
+        }
+        Debug.Log(currentLine);
         switch (touch.phase)
         {
         case TouchPhase.Began:
@@ -69,7 +80,7 @@ public class LineDrawer : MonoBehaviour
             Vector3[] points2 = new Vector3[currentLine.positionCount];
             currentLine.GetPositions(points2);
             PrimitiveContainer[] primitives = HighLevelRecognition.PrimitiveShapeGenerator(points2);
-            Debug.Log(SketchOutput.Output(primitives));
+            spellStorage = SketchOutput.Output(primitives);
             currentLine.positionCount = 0;
             findTouch = true;
             break;
@@ -110,7 +121,38 @@ public class LineDrawer : MonoBehaviour
 
         return position;
     }
+    private void SpellCast(Touch touch)
+    {
+        switch (touch.phase)
+        {
+        case TouchPhase.Began:
+            DirectionJoystick.Instance.Show();
+            Vector3 position = AdjustPointToScreen(8, touch.position);
+            DirectionJoystick.Instance.SetJoystick(position);
+            DirectionJoystick.Instance.SetJoystickCenterPoint(position);
+            break;
 
+        case TouchPhase.Moved:
+            DirectionJoystick.Instance.SetJoystickCenterPoint(AdjustPointToScreen(8, touch.position));
+            break;
+
+        case TouchPhase.Ended:
+            spellStorage = "";
+            DirectionJoystick.Instance.SetJoystickCenterPoint(
+                DirectionJoystick.Instance.joystick.transform.localPosition);
+            DirectionJoystick.Instance.Hide();
+            findTouch = true;
+            break;
+        
+        case TouchPhase.Canceled:
+            spellStorage = "";
+            DirectionJoystick.Instance.SetJoystickCenterPoint(
+                DirectionJoystick.Instance.joystick.transform.localPosition);
+            DirectionJoystick.Instance.Hide();
+            findTouch = true;
+            break;
+        }
+    }
     private void OnApplicationPause(bool pause)
     {
         if (pause == true)

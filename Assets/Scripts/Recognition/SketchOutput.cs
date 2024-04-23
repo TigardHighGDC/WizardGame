@@ -16,32 +16,20 @@ public class SketchOutput : MonoBehaviour
 
         if (Compare(sketch, water))
         {
-            foreach (GameObject gameObject in GameObject.FindGameObjectsWithTag("Enemy"))
-            {
-                gameObject.GetComponent<EnemyHealth>().ApplyWater();
-            }
             return "Water";
         }
 
         if (Compare(sketch, fire))
         {
-            foreach (GameObject gameObject in GameObject.FindGameObjectsWithTag("Enemy"))
-            {
-                gameObject.GetComponent<EnemyHealth>().ApplyFire();
-            }
             return "Fire";
         }
 
         if (Compare(sketch, lightning))
         {
-            foreach (GameObject gameObject in GameObject.FindGameObjectsWithTag("Enemy"))
-            {
-                gameObject.GetComponent<EnemyHealth>().ApplyLightning();
-            }
             return "Lightning";
         }
 
-        return "None";
+        return "";
     }
 
     public static bool Compare(PrimitiveContainer[] sketch, PrimitiveContainer[] template, float threshold = 0.4f)

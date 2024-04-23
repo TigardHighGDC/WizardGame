@@ -17,19 +17,25 @@ public class Player : MonoBehaviour
 
     void FixedUpdate()
     {
-        float x = Input.GetAxisRaw("Horizontal");
-        float y = Input.GetAxisRaw("Vertical");
         rb.velocity = MovementJoystick.Instance.GetVelocity(playerSpeed);
-        PlayerMovementAnimation(rb.velocity.x, rb.velocity.y);
+        anim.speed = rb.velocity.magnitude / playerSpeed;
+        Vector3 direction = DirectionJoystick.Instance.GetVelocity(1.0f);
+        if (direction.x != 0.0f && direction.y != 0.0f)
+        {
+            PlayerMovementAnimation(direction.x, direction.y);
+        }
+        else
+        {
+            PlayerMovementAnimation(rb.velocity.x, rb.velocity.y);
+        }
     }
 
     private void PlayerMovementAnimation(float x, float y)
     {
-        anim.enabled = true;
         // Up, Down
         if (Mathf.Abs(y) > Mathf.Abs(x))
         {
-            if (rb.velocity.y > 0)
+            if (y > 0)
             {
                 anim.Play("Forward");
             }
@@ -41,7 +47,7 @@ public class Player : MonoBehaviour
         // Left, Right
         else if (Mathf.Abs(y) < Mathf.Abs(x))
         {
-            if (rb.velocity.x > 0)
+            if (x > 0)
             {
                 anim.Play("Right");
             }
@@ -49,10 +55,6 @@ public class Player : MonoBehaviour
             {
                 anim.Play("Left");
             }
-        }
-        else
-        {
-            anim.enabled = false;
         }
     }
 }
