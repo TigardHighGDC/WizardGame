@@ -11,22 +11,22 @@ public class SketchOutput : MonoBehaviour
         if (Compare(sketch, shield))
         {
             PlayerHealth.Instance.SetInvincability(1.5f);
-            return "Shield";
+            return "shield";
         }
 
         if (Compare(sketch, water))
         {
-            return "Water";
+            return "water";
         }
 
         if (Compare(sketch, fire))
         {
-            return "Fire";
+            return "fire";
         }
 
         if (Compare(sketch, lightning))
         {
-            return "Lightning";
+            return "lightning";
         }
 
         return "";

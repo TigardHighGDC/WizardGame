@@ -16,7 +16,6 @@ public class LineDrawer : MonoBehaviour
     private void Start()
     {
         currentLine = GetComponent<LineRenderer>();
-        Debug.Log("LineRenderer: " + currentLine);
         DirectionJoystick.Instance.Hide();
     }
 
@@ -63,7 +62,6 @@ public class LineDrawer : MonoBehaviour
             SpellCast(touch);
             return;
         }
-        Debug.Log(currentLine);
         switch (touch.phase)
         {
         case TouchPhase.Began:
@@ -137,6 +135,7 @@ public class LineDrawer : MonoBehaviour
             break;
 
         case TouchPhase.Ended:
+            Player.Instance.GetComponent<Player>().CastSpell(spellStorage);
             spellStorage = "";
             DirectionJoystick.Instance.SetJoystickCenterPoint(
                 DirectionJoystick.Instance.joystick.transform.localPosition);
@@ -145,6 +144,7 @@ public class LineDrawer : MonoBehaviour
             break;
         
         case TouchPhase.Canceled:
+            Player.Instance.GetComponent<Player>().CastSpell(spellStorage);
             spellStorage = "";
             DirectionJoystick.Instance.SetJoystickCenterPoint(
                 DirectionJoystick.Instance.joystick.transform.localPosition);

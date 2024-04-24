@@ -4,15 +4,18 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    public MovementJoystick movementJoystick;
     public float playerSpeed;
+    public static GameObject Instance;
+    public GameObject lightningBolt;
     private Rigidbody2D rb;
     private Animator anim;
 
     void Start()
     {
+        Instance = gameObject;
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+        MovementJoystick.Instance.Hide();
     }
 
     void FixedUpdate()
@@ -20,7 +23,7 @@ public class Player : MonoBehaviour
         rb.velocity = MovementJoystick.Instance.GetVelocity(playerSpeed);
         anim.speed = rb.velocity.magnitude / playerSpeed;
         Vector3 direction = DirectionJoystick.Instance.GetVelocity(1.0f);
-        if (direction.x != 0.0f && direction.y != 0.0f)
+        if (direction.x != 0.0f || direction.y != 0.0f)
         {
             PlayerMovementAnimation(direction.x, direction.y);
         }
@@ -55,6 +58,17 @@ public class Player : MonoBehaviour
             {
                 anim.Play("Left");
             }
+        }
+    }
+
+    public void CastSpell(string spellName)
+    {
+        Vector3 direction = DirectionJoystick.Instance.GetVelocity(1.0f);
+
+        if (spellName == "lightning")
+        {
+            Debug.Log(Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg);
+            GameObject lightning = Instantiate(lightningBolt, transform.position, Quaternion.FromToRotation(transform.up, direction));
         }
     }
 }
