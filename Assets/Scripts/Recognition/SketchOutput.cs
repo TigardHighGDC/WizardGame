@@ -10,7 +10,6 @@ public class SketchOutput : MonoBehaviour
     {
         if (Compare(sketch, shield))
         {
-            PlayerHealth.Instance.SetInvincability(1.5f);
             return "shield";
         }
 

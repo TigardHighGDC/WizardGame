@@ -62,6 +62,8 @@ public class LineDrawer : MonoBehaviour
             SpellCast(touch);
             return;
         }
+
+        // Draw Line
         switch (touch.phase)
         {
         case TouchPhase.Began:
@@ -75,15 +77,18 @@ public class LineDrawer : MonoBehaviour
             }
             break;
         case TouchPhase.Ended:
+            // Recognize spell
             Vector3[] points2 = new Vector3[currentLine.positionCount];
             currentLine.GetPositions(points2);
             PrimitiveContainer[] primitives = HighLevelRecognition.PrimitiveShapeGenerator(points2);
             spellStorage = SketchOutput.Output(primitives);
             currentLine.positionCount = 0;
             findTouch = true;
+
+            // Set player aura
+            Player.Instance.GetComponent<Player>().CreateAura(spellStorage);
             break;
         case TouchPhase.Canceled:
-            // ShapeRecognition.Calculate();
             currentLine.positionCount = 0;
             findTouch = true;
             break;

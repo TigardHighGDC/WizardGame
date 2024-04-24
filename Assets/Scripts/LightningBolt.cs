@@ -6,7 +6,7 @@ public class LightningBolt : MonoBehaviour
 {
     private void Update()
     {
-        transform.position = transform.position + transform.up * 6.0f * Time.deltaTime;
+        transform.position = transform.position + transform.up * 10.0f * Time.deltaTime;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

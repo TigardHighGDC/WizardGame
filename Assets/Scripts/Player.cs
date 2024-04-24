@@ -7,6 +7,13 @@ public class Player : MonoBehaviour
     public float playerSpeed;
     public static GameObject Instance;
     public GameObject lightningBolt;
+
+    [Header("Auras")]
+    public GameObject lightningAura;
+    public GameObject fireAura;
+    public GameObject waterAura;
+    public GameObject earthAura;
+
     private Rigidbody2D rb;
     private Animator anim;
 
@@ -67,8 +74,48 @@ public class Player : MonoBehaviour
 
         if (spellName == "lightning")
         {
-            Debug.Log(Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg);
             GameObject lightning = Instantiate(lightningBolt, transform.position, Quaternion.FromToRotation(transform.up, direction));
         }
+        DestroyAura();
+    }
+
+    public void CreateAura(string spellName)
+    {
+        if (spellName == "lightning")
+        {
+            lightningAura.SetActive(true);
+            fireAura.SetActive(false);
+            waterAura.SetActive(false);
+            earthAura.SetActive(false);
+        }
+        else if (spellName == "fire")
+        {
+            lightningAura.SetActive(false);
+            fireAura.SetActive(true);
+            waterAura.SetActive(false);
+            earthAura.SetActive(false);
+        }
+        else if (spellName == "water")
+        {
+            lightningAura.SetActive(false);
+            fireAura.SetActive(false);
+            waterAura.SetActive(true);
+            earthAura.SetActive(false);
+        }
+        else if (spellName == "earth")
+        {
+            lightningAura.SetActive(false);
+            fireAura.SetActive(false);
+            waterAura.SetActive(false);
+            earthAura.SetActive(true);
+        }
+    }
+
+    public void DestroyAura()
+    {
+        lightningAura.SetActive(false);
+        fireAura.SetActive(false);
+        waterAura.SetActive(false);
+        earthAura.SetActive(false);
     }
 }
