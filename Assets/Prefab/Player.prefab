@@ -138,6 +138,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerSpeed: 5
   lightningBolt: {fileID: 7464231576844408312, guid: 42a034f62717f1946b0f639f193ecbf4, type: 3}
+  fireBall: {fileID: 1060261125088935008, guid: 3ad5c845ab002634f9520421d6298cb2, type: 3}
+  waterWave: {fileID: 9220294794793247267, guid: 512e62872875d144f90bcd4142648268, type: 3}
   lightningAura: {fileID: 3216314564509062102}
   fireAura: {fileID: 6028586840163581925}
   waterAura: {fileID: 8885257011604052105}
@@ -538,7 +540,7 @@ Transform:
   m_GameObject: {fileID: 8885257011604052105}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -35, y: -21, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

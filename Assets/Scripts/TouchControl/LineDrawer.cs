@@ -81,6 +81,7 @@ public class LineDrawer : MonoBehaviour
             Vector3[] points2 = new Vector3[currentLine.positionCount];
             currentLine.GetPositions(points2);
             PrimitiveContainer[] primitives = HighLevelRecognition.PrimitiveShapeGenerator(points2);
+            TemplateCreator.Instance.AddJSON(primitives);
             spellStorage = SketchOutput.Output(primitives);
             currentLine.positionCount = 0;
             findTouch = true;
@@ -99,7 +100,10 @@ public class LineDrawer : MonoBehaviour
     {
         Vector3 previousPoint = lineRenderer.GetPosition(lineRenderer.positionCount - 2);
         Vector3 currentPoint = lineRenderer.GetPosition(lineRenderer.positionCount - 1);
-
+        if (lineRenderer.positionCount <= 1)
+        {
+            return;
+        }
         if (previousPoint[0] == currentPoint[0] && previousPoint[1] == currentPoint[1])
         {
             lineRenderer.positionCount--;

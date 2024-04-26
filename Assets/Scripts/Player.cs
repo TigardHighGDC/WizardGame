@@ -6,7 +6,12 @@ public class Player : MonoBehaviour
 {
     public float playerSpeed;
     public static GameObject Instance;
+
+    [Header("Spells")]
     public GameObject lightningBolt;
+    public GameObject fireBall;
+    public GameObject waterWave;
+    public GameObject earthquake;
 
     [Header("Auras")]
     public GameObject lightningAura;
@@ -72,9 +77,22 @@ public class Player : MonoBehaviour
     {
         Vector3 direction = DirectionJoystick.Instance.GetVelocity(1.0f);
 
-        if (spellName == "lightning")
+        switch(spellName)
         {
-            GameObject lightning = Instantiate(lightningBolt, transform.position, Quaternion.FromToRotation(transform.up, direction));
+            case "lightning":
+                GameObject lightning = Instantiate(lightningBolt, transform.position, Quaternion.FromToRotation(transform.up, direction));
+                break;
+            case "fire":
+                GameObject fire = Instantiate(fireBall, transform.position, Quaternion.FromToRotation(transform.up, direction));
+                break;
+            case "water":
+                GameObject water = Instantiate(waterWave, transform.position, Quaternion.FromToRotation(transform.up, direction));
+                break;
+            case "earth":
+                GameObject earth = Instantiate(earthquake, transform.position, Quaternion.FromToRotation(transform.up, direction));
+                break;
+            case "shield":
+                break;
         }
         DestroyAura();
     }

@@ -6,6 +6,8 @@ public class BasicEnemy : MonoBehaviour
 {
     public bool chasePlayer = true;
     public float speed = 1f;
+    public float MaxAcceleration = 4f;
+
     private Rigidbody2D rb;
     private bool stunned = false;
 
@@ -14,11 +16,12 @@ public class BasicEnemy : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
+        AccelerationLimit();
         if (chasePlayer && !stunned)
         {
-            rb.AddForce((Player.Instance.transform.position - transform.position).normalized * (speed / 50.0f), ForceMode2D.Impulse);
+            rb.AddForce(((Player.Instance.transform.position - transform.position).normalized), ForceMode2D.Impulse);
         }
     }
 
@@ -32,5 +35,13 @@ public class BasicEnemy : MonoBehaviour
         stunned = true;
         yield return new WaitForSeconds(duration);
         stunned = false;
+    }
+
+    private void AccelerationLimit()
+    {
+        if (rb.velocity.magnitude > MaxAcceleration)
+        {
+            rb.velocity = rb.velocity.normalized * MaxAcceleration;
+        }
     }
 }
