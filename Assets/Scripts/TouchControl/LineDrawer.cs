@@ -81,7 +81,6 @@ public class LineDrawer : MonoBehaviour
             Vector3[] points2 = new Vector3[currentLine.positionCount];
             currentLine.GetPositions(points2);
             PrimitiveContainer[] primitives = HighLevelRecognition.PrimitiveShapeGenerator(points2);
-            TemplateCreator.Instance.AddJSON(primitives);
             spellStorage = SketchOutput.Output(primitives);
             currentLine.positionCount = 0;
             findTouch = true;
@@ -151,7 +150,7 @@ public class LineDrawer : MonoBehaviour
             DirectionJoystick.Instance.Hide();
             findTouch = true;
             break;
-        
+
         case TouchPhase.Canceled:
             Player.Instance.GetComponent<Player>().CastSpell(spellStorage);
             spellStorage = "";

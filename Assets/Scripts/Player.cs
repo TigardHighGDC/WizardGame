@@ -77,22 +77,27 @@ public class Player : MonoBehaviour
     {
         Vector3 direction = DirectionJoystick.Instance.GetVelocity(1.0f);
 
-        switch(spellName)
+        switch (spellName)
         {
-            case "lightning":
-                GameObject lightning = Instantiate(lightningBolt, transform.position, Quaternion.FromToRotation(transform.up, direction));
-                break;
-            case "fire":
-                GameObject fire = Instantiate(fireBall, transform.position, Quaternion.FromToRotation(transform.up, direction));
-                break;
-            case "water":
-                GameObject water = Instantiate(waterWave, transform.position, Quaternion.FromToRotation(transform.up, direction));
-                break;
-            case "earth":
-                GameObject earth = Instantiate(earthquake, transform.position, Quaternion.FromToRotation(transform.up, direction));
-                break;
-            case "shield":
-                break;
+        case "lightning":
+            GameObject lightning =
+                Instantiate(lightningBolt, transform.position, Quaternion.FromToRotation(transform.up, direction));
+            break;
+        case "fire":
+            GameObject fire =
+                Instantiate(fireBall, transform.position, Quaternion.FromToRotation(transform.up, direction));
+            break;
+        case "water":
+            GameObject water =
+                Instantiate(waterWave, transform.position, Quaternion.FromToRotation(transform.up, direction));
+            break;
+        case "earth":
+            GameObject earth =
+                Instantiate(earthquake, transform.position, Quaternion.FromToRotation(transform.up, direction));
+            break;
+        case "shield":
+            PlayerHealth.Instance.SetInvincability(1.5f);
+            break;
         }
         DestroyAura();
     }

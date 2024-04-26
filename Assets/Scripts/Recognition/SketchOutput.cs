@@ -130,5 +130,7 @@ public class SketchOutput : MonoBehaviour
     public static PrimitiveContainer[] water = { new PrimitiveContainer(1, 0.0f, 0.5047563f, true, 0.8546553f),
                                                  new PrimitiveContainer(1, 0.5974314f, 0.495243728f, true,
                                                                         0.505029261f) };
-    public static PrimitiveContainer[] earth = {new PrimitiveContainer(0, 0.0f, 0.4154772f, false, 0.0f), new PrimitiveContainer(0, 4.697068f, 0.4006319f, false, 0.0f), new PrimitiveContainer(0, 3.20076537f, 0.183890909f, false, 0.0f)};
+    public static PrimitiveContainer[] earth = { new PrimitiveContainer(0, 0.0f, 0.4154772f, false, 0.0f),
+                                                 new PrimitiveContainer(0, 4.697068f, 0.4006319f, false, 0.0f),
+                                                 new PrimitiveContainer(0, 3.20076537f, 0.183890909f, false, 0.0f) };
 }

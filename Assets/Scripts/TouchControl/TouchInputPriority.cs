@@ -20,7 +20,8 @@ public class TouchInputPriority : MonoBehaviour
                 touchIndex = -1;
                 for (int i = 0; i < Input.touchCount; i++)
                 {
-                    if (Input.GetTouch(i).phase == TouchPhase.Began && (AdjustPointToScreen(8, Input.GetTouch(i).position).x < 0.0f || !FightMode))
+                    if (Input.GetTouch(i).phase == TouchPhase.Began &&
+                        (AdjustPointToScreen(8, Input.GetTouch(i).position).x < 0.0f || !FightMode))
                     {
                         touchId = Input.GetTouch(i).fingerId;
                         findTouch = false;
@@ -57,8 +58,7 @@ public class TouchInputPriority : MonoBehaviour
                 // Adds camera position to the touch position
                 Vector3 adjustedTouch = AdjustPointToScreen(8, touch.position);
 
-                Collider2D[] colliders =
-                    Physics2D.OverlapPointAll(adjustedTouch + transform.position);
+                Collider2D[] colliders = Physics2D.OverlapPointAll(adjustedTouch + transform.position);
                 Dictionary<string, GameObject> tag = new Dictionary<string, GameObject>();
                 foreach (Collider2D collider in colliders)
                 {
@@ -107,7 +107,6 @@ public class TouchInputPriority : MonoBehaviour
                 }
                 findTouch = true;
                 break;
-            
 
             case TouchPhase.Canceled:
                 if (joystickStart)

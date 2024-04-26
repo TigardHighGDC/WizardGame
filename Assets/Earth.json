@@ -2,22 +2,22 @@
   {
     "Type": 0,
     "Rotation": 0.0,
-    "Length": 0.34538874,
+    "Length": 0.411827832,
     "ConcaveUp": false,
     "Completeness": 0.0
   },
   {
     "Type": 0,
-    "Rotation": 2.03532076,
-    "Length": 0.399800152,
+    "Rotation": 3.97937536,
+    "Length": 0.3274944,
     "ConcaveUp": false,
     "Completeness": 0.0
   },
   {
-    "Type": 0,
-    "Rotation": 6.14465046,
-    "Length": 0.254811078,
-    "ConcaveUp": false,
-    "Completeness": 0.0
+    "Type": 1,
+    "Rotation": 2.04674149,
+    "Length": 0.260677755,
+    "ConcaveUp": true,
+    "Completeness": 0.531552
   }
 ]

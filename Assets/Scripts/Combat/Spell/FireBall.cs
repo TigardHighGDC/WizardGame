@@ -16,7 +16,7 @@ public class FireBall : MonoBehaviour
         if (collision.tag == "Enemy")
         {
             collision.GetComponent<EnemyHealth>().TakeDamage(25.0f);
-            Instantiate(FireWall, transform.position, transform.rotation);
+            Instantiate(FireWall, transform.position, Quaternion.identity);
             Destroy(gameObject);
         }
     }

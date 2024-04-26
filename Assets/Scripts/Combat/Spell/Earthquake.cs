@@ -28,7 +28,6 @@ public class Earthquake : MonoBehaviour
             collision.GetComponent<BasicEnemy>().StartStun(2.0f);
             Knockback(collision.gameObject, Player.Instance);
         }
-
     }
 
     private void Knockback(GameObject enemy, GameObject player)

@@ -4,11 +4,22 @@ using UnityEngine;
 
 public class FireWall : MonoBehaviour
 {
-    void OnTriggerStay2D(Collider2D collider)
+    private float timer = 4.0f;
+
+    private void Update()
     {
-        if(collider.tag == "Enemy")
+        timer -= Time.deltaTime;
+        if (timer <= 0.0f)
         {
-            collider.gameObject.GetComponent<EnemyHealth>().TakeDamage(15f * Time.deltaTime);
+            Destroy(gameObject);
+        }
+    }
+
+    private void OnTriggerStay2D(Collider2D collider)
+    {
+        if (collider.tag == "Enemy")
+        {
+            collider.gameObject.GetComponent<EnemyHealth>().TakeDamage(10f * Time.deltaTime);
         }
     }
 }
