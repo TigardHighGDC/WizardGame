@@ -4,14 +4,46 @@ using UnityEngine;
 
 public class TouchInputPriority : MonoBehaviour
 {
+    public bool FightMode = false;
+
     private bool joystickStart = false;
+    private int touchId = -1;
+    private int touchIndex = -1;
+    private bool findTouch = true;
     // Update is called once per frame
     void Update()
     {
         if (Input.touchCount > 0)
         {
-            Touch touch = Input.GetTouch(0);
+            if (findTouch)
+            {
+                touchIndex = -1;
+                for (int i = 0; i < Input.touchCount; i++)
+                {
+                    if (Input.GetTouch(i).phase == TouchPhase.Began &&
+                        (AdjustPointToScreen(8, Input.GetTouch(i).position).x < 0.0f || !FightMode))
+                    {
+                        touchId = Input.GetTouch(i).fingerId;
+                        findTouch = false;
+                        break;
+                    }
+                }
+            }
+            if (findTouch)
+            {
+                return;
+            }
 
+            for (int i = 0; i < Input.touchCount; i++)
+            {
+                if (Input.GetTouch(i).fingerId == touchId)
+                {
+                    touchIndex = i;
+                    break;
+                }
+            }
+
+            Touch touch = Input.GetTouch(touchIndex);
             // Handle finger movements based on TouchPhase
             switch (touch.phase)
             {
@@ -24,8 +56,9 @@ public class TouchInputPriority : MonoBehaviour
                     break;
                 }
                 // Adds camera position to the touch position
-                Collider2D[] colliders =
-                    Physics2D.OverlapPointAll(AdjustPointToScreen(8, touch.position) + transform.position);
+                Vector3 adjustedTouch = AdjustPointToScreen(8, touch.position);
+
+                Collider2D[] colliders = Physics2D.OverlapPointAll(adjustedTouch + transform.position);
                 Dictionary<string, GameObject> tag = new Dictionary<string, GameObject>();
                 foreach (Collider2D collider in colliders)
                 {
@@ -51,7 +84,7 @@ public class TouchInputPriority : MonoBehaviour
                 {
                     joystickStart = true;
                     MovementJoystick.Instance.Show();
-                    Vector3 position = AdjustPointToScreen(8, touch.position);
+                    Vector3 position = adjustedTouch;
                     MovementJoystick.Instance.SetJoystick(position);
                     MovementJoystick.Instance.SetJoystickCenterPoint(position);
                 }
@@ -72,6 +105,18 @@ public class TouchInputPriority : MonoBehaviour
                     MovementJoystick.Instance.Hide();
                     joystickStart = false;
                 }
+                findTouch = true;
+                break;
+
+            case TouchPhase.Canceled:
+                if (joystickStart)
+                {
+                    MovementJoystick.Instance.SetJoystickCenterPoint(
+                        MovementJoystick.Instance.joystick.transform.localPosition);
+                    MovementJoystick.Instance.Hide();
+                    joystickStart = false;
+                }
+                findTouch = true;
                 break;
             }
         }
