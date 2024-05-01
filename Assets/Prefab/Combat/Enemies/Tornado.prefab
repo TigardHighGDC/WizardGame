@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 168453604412843206}
   - component: {fileID: 1150224006326806521}
   - component: {fileID: 7528600809740357141}
+  - component: {fileID: 1209998771670164161}
   m_Layer: 0
   m_Name: Tornado
   m_TagString: Enemy
@@ -224,3 +225,15 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.29, y: 1.95}
   m_EdgeRadius: 0
+--- !u!114 &1209998771670164161
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3902031153246503406}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef3278065f161d14480e2119fa7ab141, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

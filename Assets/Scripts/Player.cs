@@ -89,7 +89,7 @@ public class Player : MonoBehaviour
             break;
         case "water":
             GameObject water =
-                Instantiate(waterWave, transform.position, Quaternion.FromToRotation(transform.up, direction));
+                Instantiate(waterWave, transform.position + direction, Quaternion.FromToRotation(transform.up, direction));
             break;
         case "earth":
             GameObject earth =
