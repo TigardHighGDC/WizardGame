@@ -11,7 +11,7 @@ public class MovementJoystick : MonoBehaviour
     public GameObject joystickCenter;
     public float maxRadius;
 
-    void Start()
+    void Awake()
     {
         Instance = this;
     }
