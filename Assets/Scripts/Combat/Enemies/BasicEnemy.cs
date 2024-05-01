@@ -8,8 +8,8 @@ public class BasicEnemy : MonoBehaviour
     public float speed = 1f;
     public float MaxAcceleration = 4f;
 
-    private Rigidbody2D rb;
-    private bool stunned = false;
+    protected Rigidbody2D rb;
+    protected bool stunned = false;
 
     private void Start()
     {
@@ -30,14 +30,14 @@ public class BasicEnemy : MonoBehaviour
         StartCoroutine(Stun(duration));
     }
 
-    private IEnumerator Stun(float duration)
+    protected IEnumerator Stun(float duration)
     {
         stunned = true;
         yield return new WaitForSeconds(duration);
         stunned = false;
     }
 
-    private void AccelerationLimit()
+    protected void AccelerationLimit()
     {
         if (rb.velocity.magnitude > MaxAcceleration)
         {
