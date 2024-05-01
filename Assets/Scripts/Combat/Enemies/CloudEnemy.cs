@@ -21,7 +21,8 @@ public class CloudEnemy : BasicEnemy
         AccelerationLimit();
         if (chasePlayer && !stunned)
         {
-            rb.AddForce(((Player.Instance.transform.position - transform.position).normalized) * RunState(), ForceMode2D.Impulse);
+            rb.AddForce(((Player.Instance.transform.position - transform.position).normalized) * RunState(),
+                        ForceMode2D.Impulse);
         }
     }
 
@@ -47,7 +48,8 @@ public class CloudEnemy : BasicEnemy
         {
             attackTimer = Random.Range(minAttack, maxAttack);
             Vector3 direction = (Player.Instance.transform.position - transform.position).normalized;
-            GameObject lightning = Instantiate(lightningBolt, transform.position, Quaternion.FromToRotation(transform.up, direction));
+            GameObject lightning =
+                Instantiate(lightningBolt, transform.position, Quaternion.FromToRotation(transform.up, direction));
             lightning.GetComponent<Rigidbody2D>().velocity = direction * 5.0f;
         }
     }
