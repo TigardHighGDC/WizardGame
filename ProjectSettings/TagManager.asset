@@ -10,6 +10,7 @@ TagManager:
   - Line
   - Debug
   - Enemy
+  - Wall
   layers:
   - Default
   - TransparentFX

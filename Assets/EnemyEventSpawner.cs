@@ -6,9 +6,9 @@ public class EnemyEventSpawner : MonoBehaviour
 {
     public GameObject[] possibleEnemies = {};
     public GameObject Wall;
+    public int enemyCount = 5;
 
     private bool canRemove = false;
-    private int enemyCount = 10;
     private float interval = 2.0f;
     private float spawnWidth = 14.0f;
     private float spawnHeight = 14.0f;
