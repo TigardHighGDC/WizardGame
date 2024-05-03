@@ -22,7 +22,7 @@ public class Earthquake : MonoBehaviour
             return;
         }
 
-        if (collision.tag == "Enemy")
+        if (collision.tag == "Enemy" && collision.isTrigger)
         {
             collision.GetComponent<EnemyHealth>().TakeDamage(20.0f);
             collision.GetComponent<BasicEnemy>().StartStun(2.0f);

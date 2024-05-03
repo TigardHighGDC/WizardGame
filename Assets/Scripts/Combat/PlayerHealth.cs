@@ -30,6 +30,16 @@ public class PlayerHealth : MonoBehaviour
         }
     }
 
+    public void Heal(float amount)
+    {
+        currentHealth += amount;
+        if (currentHealth > MaxHealth)
+        {
+            currentHealth = MaxHealth;
+        }
+        Slider.value = currentHealth / MaxHealth;
+    }
+
     public void TakeDamage(float damage)
     {
         if (invincability > 0.0f)
