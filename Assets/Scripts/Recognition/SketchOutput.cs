@@ -36,7 +36,7 @@ public class SketchOutput : MonoBehaviour
         return "";
     }
 
-    public static bool Compare(PrimitiveContainer[] sketch, PrimitiveContainer[] template, float threshold = 0.4f)
+    public static bool Compare(PrimitiveContainer[] sketch, PrimitiveContainer[] template, float threshold = 0.6f)
     {
         float sizeCheck = (1.0f / template.Length) * 0.3f;
         int u = 0;
@@ -44,6 +44,7 @@ public class SketchOutput : MonoBehaviour
 
         for (int i = 0; i < sketch.Length; i++)
         {
+            // Removes small lines
             if (sketch[i].Length < sizeCheck)
             {
                 continue;
@@ -57,7 +58,7 @@ public class SketchOutput : MonoBehaviour
                 return false;
             }
             if (thresholdCheck(sketch[i].Length, template[u].Length, threshold) &&
-                radianThresholdCheck(sketch[i].Rotation, template[u].Rotation, 1.5f))
+                radianThresholdCheck(sketch, template, u, 0.8f))
             {
                 if (sketch[i].Type == 1)
                 {
@@ -93,8 +94,22 @@ public class SketchOutput : MonoBehaviour
         return a * (1 - threshold) < b && a * (1 + threshold) > b;
     }
 
-    private static bool radianThresholdCheck(float a, float b, float radianThreshold)
+    private static bool radianThresholdCheck(PrimitiveContainer[] sketch, PrimitiveContainer[] template, int index,
+                                             float radianThreshold)
     {
+        float a = sketch[index].Rotation;
+        float b = template[index].Rotation;
+        if (index > 0)
+        {
+            // Takes directional change into account
+            a -= sketch[index - 1].Rotation;
+            b -= template[index - 1].Rotation;
+
+            // Removes negative values
+            a = (a + (Mathf.PI * 4)) % (Mathf.PI * 2);
+            b = (b + (Mathf.PI * 4)) % (Mathf.PI * 2);
+        }
+
         if (b + radianThreshold > 2 * Mathf.PI)
         {
             if (a < b + radianThreshold - (2 * Mathf.PI))
