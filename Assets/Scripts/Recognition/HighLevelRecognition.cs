@@ -62,7 +62,7 @@ public class HighLevelRecognition : MonoBehaviour
             }
             else
             {
-                if (circle[0] < lineDeviation && DCR < 3.5f && NDDE > 0.65f)
+                if (circle[0] < lineDeviation && DCR < 3.5f && NDDE > 0.75f)
                 {
                     // Is Arc, Keep going
                     int current = i;
@@ -76,7 +76,7 @@ public class HighLevelRecognition : MonoBehaviour
                         DCR = PreRecognition.DCR_Calculator(directionSlice);
                         NDDE = PreRecognition.NDDE_Calculator(directionSlice, pointSlice);
 
-                        if (circle[0] < lineDeviation && circle[1] < 1.2 && DCR < 3.5f && NDDE > 0.7f)
+                        if (circle[0] < lineDeviation && circle[1] < 1.2 && DCR < 3.5f && NDDE > 0.85f)
                         {
                             current = u;
                             continue;
