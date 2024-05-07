@@ -11,9 +11,9 @@ public class LightningBolt : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == "Enemy")
+        if (collision.tag == "Enemy" && collision.isTrigger)
         {
-            collision.GetComponent<EnemyHealth>().TakeDamage(25.0f);
+            collision.GetComponent<EnemyHealth>().TakeDamage(35.0f);
             collision.GetComponent<BasicEnemy>().StartStun();
             Destroy(gameObject);
         }

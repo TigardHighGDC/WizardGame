@@ -7,7 +7,8 @@ public class EnemyHealth : MonoBehaviour
 {
     public float MaxHealth = 100.0f;
 
-    private float currentHealth;
+    [HideInInspector]
+    public float currentHealth;
 
     private void Start()
     {

@@ -24,7 +24,7 @@ public class WaterWave : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         Debug.Log(collision.tag);
-        if (collision.tag == "Enemy")
+        if (collision.tag == "Enemy" && collision.isTrigger)
         {
             collision.GetComponent<EnemyHealth>().TakeDamage(15.0f);
         }
