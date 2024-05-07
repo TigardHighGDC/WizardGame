@@ -16,4 +16,13 @@ public class BossDialogue : MonoBehaviour
             triggeredBefore = true;
         }
     }
+
+    private void Update()
+    {
+        if (triggeredBefore && !DialogueBox.Instance.IsTalking)
+        {
+            Boss.GetComponent<GeneralBossF>().startFight = true;
+            Destroy(gameObject);
+        }
+    }
 }
