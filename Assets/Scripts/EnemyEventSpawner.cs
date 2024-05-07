@@ -34,15 +34,16 @@ public class EnemyEventSpawner : MonoBehaviour
     {
         for (int i = 0; i < enemyCount; i++)
         {
-            Vector3 spawnPosition = transform.position + new Vector3(Random.Range(-spawnWidth, spawnWidth), Random.Range(-spawnHeight, spawnHeight), 0);
+            Vector3 spawnPosition = transform.position + new Vector3(Random.Range(-spawnWidth, spawnWidth),
+                                                                     Random.Range(-spawnHeight, spawnHeight), 0);
             while (Vector3.Distance(spawnPosition, Player.Instance.transform.position) < 4.0f)
             {
-                spawnPosition = transform.position + new Vector3(Random.Range(-spawnWidth, spawnWidth), Random.Range(-spawnHeight, spawnHeight), 0);
+                spawnPosition = transform.position + new Vector3(Random.Range(-spawnWidth, spawnWidth),
+                                                                 Random.Range(-spawnHeight, spawnHeight), 0);
             }
             Instantiate(possibleEnemies[Random.Range(0, possibleEnemies.Length)], spawnPosition, Quaternion.identity);
             yield return new WaitForSeconds(interval);
         }
         canRemove = true;
     }
-
 }
