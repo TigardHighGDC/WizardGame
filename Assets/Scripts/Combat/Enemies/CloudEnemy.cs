@@ -12,8 +12,11 @@ public class CloudEnemy : BasicEnemy
 
     private void Update()
     {
-        attackTimer -= Time.deltaTime;
-        Attack();
+        if (!stunned)
+        {
+            attackTimer -= Time.deltaTime;
+            Attack();
+        }
     }
 
     private void FixedUpdate()

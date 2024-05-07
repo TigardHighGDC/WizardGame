@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class EnemySpell : MonoBehaviour
 {
+    public float Damage = 20.0f;
+
     private float timer = 10.0f;
     private void Update()
     {
@@ -18,7 +20,7 @@ public class EnemySpell : MonoBehaviour
     {
         if (collision.tag == "Player")
         {
-            collision.GetComponent<PlayerHealth>().TakeDamage(20.0f);
+            collision.GetComponent<PlayerHealth>().TakeDamage(Damage);
             Destroy(gameObject);
         }
         else if (collision.tag == "Wall")
