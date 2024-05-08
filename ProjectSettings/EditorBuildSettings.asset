@@ -14,6 +14,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/AirIslandTileMap.unity
     guid: 6bd34c0b290e9c84197d60a59361d954
+  - enabled: 1
+    path: Assets/Scenes/AirFactory.unity
+    guid: 3504179acac10b6408c4da80aa87aadb
   m_configObjects:
     com.unity.adaptiveperformance.loader_settings: {fileID: 11400000, guid: 1d42c9c49388c1640b16a8bbfc983157, type: 2}
     com.unity.adaptiveperformance.simulator.provider_settings: {fileID: 11400000, guid: 3eb05e13d47e94045a9f067f9f79e40c, type: 2}
