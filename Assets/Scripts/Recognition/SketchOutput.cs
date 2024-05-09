@@ -36,7 +36,7 @@ public class SketchOutput : MonoBehaviour
         return "";
     }
 
-    public static bool Compare(PrimitiveContainer[] sketch, PrimitiveContainer[] template, float threshold = 0.6f)
+    public static bool Compare(PrimitiveContainer[] sketch, PrimitiveContainer[] template, float threshold = 0.65f)
     {
         float sizeCheck = (1.0f / template.Length) * 0.3f;
         int u = 0;
@@ -70,7 +70,7 @@ public class SketchOutput : MonoBehaviour
                     {
                         sketch[i].ConcaveUp = !sketch[i].ConcaveUp;
                     }
-                    if (thresholdCheck(sketch[i].Completeness, template[u].Completeness, threshold) &&
+                    if (thresholdCheck(sketch[i].Completeness, template[u].Completeness, 0.4f) &&
                         sketch[i].ConcaveUp == template[u].ConcaveUp)
                     {
                         u += 1;

@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class LightningBolt : MonoBehaviour
 {
-    private void Update()
+    private void Start()
     {
-        transform.position = transform.position + transform.up * 10.0f * Time.deltaTime;
+        Rigidbody2D rb2d = GetComponent<Rigidbody2D>();
+        rb2d.velocity = transform.up * 10.0f;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -15,6 +16,10 @@ public class LightningBolt : MonoBehaviour
         {
             collision.GetComponent<EnemyHealth>().TakeDamage(35.0f);
             collision.GetComponent<BasicEnemy>().StartStun();
+            Destroy(gameObject);
+        }
+        else if (collision.tag == "Wall")
+        {
             Destroy(gameObject);
         }
     }

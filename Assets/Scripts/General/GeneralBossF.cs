@@ -36,7 +36,7 @@ public class GeneralBossF : BasicEnemy
 
     private void FixedUpdate()
     {
-        if (GetComponent<EnemyHealth>().currentHealth > 400f)
+        if (GetComponent<EnemyHealth>().currentHealth > 200f)
         {
             rb.velocity = Vector3.zero;
             return;
