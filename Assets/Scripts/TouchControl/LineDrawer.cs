@@ -21,6 +21,15 @@ public class LineDrawer : MonoBehaviour
 
     private void Update()
     {
+        // Does not need directional joystick
+        if (spellStorage == "shield")
+        {
+            PlayerHealth.Instance.SetInvincability(2.0f);
+            spellStorage = "";
+            findTouch = true;
+            return;
+        }
+        
         if (Input.touchCount == 0 || !FightMode)
         {
             return;
@@ -71,7 +80,7 @@ public class LineDrawer : MonoBehaviour
             break;
         case TouchPhase.Moved:
             if (Vector3.Distance(AdjustPointToScreen(8, touch.position),
-                                 currentLine.GetPosition(currentLine.positionCount - 1)) > 0.25f)
+                                 currentLine.GetPosition(currentLine.positionCount - 1)) > 0.35f)
             {
                 AddPoint(currentLine, touch.position);
             }
@@ -97,12 +106,12 @@ public class LineDrawer : MonoBehaviour
 
     private void RemoveDuplicates(LineRenderer lineRenderer)
     {
-        Vector3 previousPoint = lineRenderer.GetPosition(lineRenderer.positionCount - 2);
-        Vector3 currentPoint = lineRenderer.GetPosition(lineRenderer.positionCount - 1);
-        if (lineRenderer.positionCount <= 1)
+        if (lineRenderer.positionCount <= 2)
         {
             return;
         }
+        Vector3 previousPoint = lineRenderer.GetPosition(lineRenderer.positionCount - 2);
+        Vector3 currentPoint = lineRenderer.GetPosition(lineRenderer.positionCount - 1);
         if (previousPoint[0] == currentPoint[0] && previousPoint[1] == currentPoint[1])
         {
             lineRenderer.positionCount--;
@@ -129,6 +138,7 @@ public class LineDrawer : MonoBehaviour
     }
     private void SpellCast(Touch touch)
     {
+        // Creates joystick for player to set direction of spell
         switch (touch.phase)
         {
         case TouchPhase.Began:

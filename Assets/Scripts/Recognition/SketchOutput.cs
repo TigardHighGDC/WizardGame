@@ -134,7 +134,7 @@ public class SketchOutput : MonoBehaviour
 
     // Spell Raw Data
     public static PrimitiveContainer[] fire = { new PrimitiveContainer(0, 0.0f, 0.457411557f, false, 0.0f),
-                                                new PrimitiveContainer(0, 3.90409064f, 0.3343333f, false, 0.0f),
+                                                new PrimitiveContainer(0, 3.5f, 0.3343333f, false, 0.0f),
                                                 new PrimitiveContainer(1, 1.798421f, 0.208255142f, true,
                                                                        0.408551544f) };
     public static PrimitiveContainer[] lightning = { new PrimitiveContainer(0, 0.0f, 0.4076188f, false, 0.0f),
