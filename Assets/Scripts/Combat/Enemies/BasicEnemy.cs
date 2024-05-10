@@ -25,6 +25,19 @@ public class BasicEnemy : MonoBehaviour
         }
     }
 
+    private void Update()
+    {
+        Vector3 direction = Player.Instance.transform.position - transform.position;
+        if (direction.x > 0.0f)
+        {
+            transform.localScale = new Vector3(1, 1, 1);
+        }
+        else if (direction.x < 0.0f)
+        {
+            transform.localScale = new Vector3(-1, 1, 1);
+        }
+    }
+
     public void StartStun(float duration = 3.0f)
     {
         StartCoroutine(Stun(duration));
