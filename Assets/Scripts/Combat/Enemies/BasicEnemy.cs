@@ -20,9 +20,13 @@ public class BasicEnemy : MonoBehaviour
     private void FixedUpdate()
     {
         AccelerationLimit();
-        if (chasePlayer && !stunned)
+        if (chasePlayer)
         {
             rb.AddForce(((Player.Instance.transform.position - transform.position).normalized), ForceMode2D.Impulse);
+        }
+        if (stunned)
+        {
+            rb.velocity = Vector2.zero;
         }
     }
 
