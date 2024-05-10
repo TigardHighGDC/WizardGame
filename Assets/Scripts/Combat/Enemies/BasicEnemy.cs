@@ -7,6 +7,7 @@ public class BasicEnemy : MonoBehaviour
     public bool chasePlayer = true;
     public float speed = 1f;
     public float MaxAcceleration = 4f;
+    public int directionSwap = 1;
 
     protected Rigidbody2D rb;
     protected bool stunned = false;
@@ -30,11 +31,11 @@ public class BasicEnemy : MonoBehaviour
         Vector3 direction = Player.Instance.transform.position - transform.position;
         if (direction.x > 0.0f)
         {
-            transform.localScale = new Vector3(1, 1, 1);
+            transform.localScale = new Vector3(1 * directionSwap, 1, 1);
         }
         else if (direction.x < 0.0f)
         {
-            transform.localScale = new Vector3(-1, 1, 1);
+            transform.localScale = new Vector3(-1 * directionSwap, 1, 1);
         }
     }
 
