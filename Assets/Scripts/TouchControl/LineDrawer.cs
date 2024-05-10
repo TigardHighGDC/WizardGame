@@ -29,7 +29,7 @@ public class LineDrawer : MonoBehaviour
             findTouch = true;
             return;
         }
-        
+
         if (Input.touchCount == 0 || !FightMode)
         {
             return;

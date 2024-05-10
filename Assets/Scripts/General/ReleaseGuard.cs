@@ -24,7 +24,7 @@ public class ReleaseGuard : MonoBehaviour
             StartCoroutine(SpawnEnemies());
         }
     }
-    
+
     private IEnumerator SpawnEnemies()
     {
         for (int i = 0; i < enemyCount; i++)

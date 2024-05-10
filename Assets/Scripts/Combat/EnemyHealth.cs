@@ -46,20 +46,22 @@ public class EnemyHealth : MonoBehaviour
         SpriteRenderer sprite = GetComponent<SpriteRenderer>();
         for (int i = 5; i > 0; i--)
         {
-            sprite.color = new Color(1f,1f,1f, 0.5f + (i * 0.1f));
+            sprite.color = new Color(1f, 1f, 1f, 0.5f + (i * 0.1f));
             for (int child = 0; child < transform.childCount; child++)
             {
-                gameObject.transform.GetChild(child).GetComponent<SpriteRenderer>().color = new Color(1f,1f,1f, 0.5f + (i * 0.1f));
+                gameObject.transform.GetChild(child).GetComponent<SpriteRenderer>().color =
+                    new Color(1f, 1f, 1f, 0.5f + (i * 0.1f));
             }
             yield return new WaitForSeconds(0.02f);
         }
 
         for (int i = 0; i < 5; i++)
         {
-            sprite.color = new Color(1f,1f,1f, 0.5f + (i * 0.1f));
+            sprite.color = new Color(1f, 1f, 1f, 0.5f + (i * 0.1f));
             for (int child = 0; child < transform.childCount; child++)
             {
-                gameObject.transform.GetChild(child).GetComponent<SpriteRenderer>().color = new Color(1f,1f,1f, 0.5f + (i * 0.1f));
+                gameObject.transform.GetChild(child).GetComponent<SpriteRenderer>().color =
+                    new Color(1f, 1f, 1f, 0.5f + (i * 0.1f));
             }
             yield return new WaitForSeconds(0.02f);
         }
