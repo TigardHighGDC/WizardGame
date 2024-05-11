@@ -1700,11 +1700,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3315707176804995722, guid: 441b197391cb181448a9209d2e53d22e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 38.61
       objectReference: {fileID: 0}
     - target: {fileID: 3315707176804995722, guid: 441b197391cb181448a9209d2e53d22e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -8
+      value: 4.46
       objectReference: {fileID: 0}
     - target: {fileID: 3315707176804995722, guid: 441b197391cb181448a9209d2e53d22e, type: 3}
       propertyPath: m_LocalPosition.z
@@ -14651,8 +14651,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ae693086279c08499c1bda54802086b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Dialogue:
-  - Cool! Now try XYZ
   Brother: {fileID: 0}
 --- !u!61 &2011325922
 BoxCollider2D:
