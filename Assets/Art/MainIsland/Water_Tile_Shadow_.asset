@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 13312, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: Water tile
+  m_Name: Water_Tile_Shadow_
   m_EditorClassIdentifier: 
-  m_Sprite: {fileID: 21300000, guid: e6c2077aeb1d23f43b14ea808d02a58c, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ff51df443b8d78a4795a74d1e1dfce26, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Transform:
     e00: 1
