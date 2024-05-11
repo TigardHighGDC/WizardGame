@@ -9,12 +9,11 @@ public class GeneralBossF : BasicEnemy
     public GameObject bullet;
     public GameObject guard;
 
-
     private bool swapScatter = false;
     private int maxShots = 20;
     private int numShots = 10;
     private bool canAttack = true;
-    
+
     private void Update()
     {
         if (!startFight)
@@ -36,7 +35,7 @@ public class GeneralBossF : BasicEnemy
 
     private void FixedUpdate()
     {
-        if (GetComponent<EnemyHealth>().currentHealth > 400f)
+        if (GetComponent<EnemyHealth>().currentHealth > 200f)
         {
             rb.velocity = Vector3.zero;
             return;
@@ -47,8 +46,6 @@ public class GeneralBossF : BasicEnemy
             rb.AddForce(((Player.Instance.transform.position - transform.position).normalized), ForceMode2D.Impulse);
         }
     }
-    
-    
 
     private void ScatterShot(int numShots, bool reverse = false)
     {

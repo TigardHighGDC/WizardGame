@@ -36,7 +36,7 @@ public class SketchOutput : MonoBehaviour
         return "";
     }
 
-    public static bool Compare(PrimitiveContainer[] sketch, PrimitiveContainer[] template, float threshold = 0.6f)
+    public static bool Compare(PrimitiveContainer[] sketch, PrimitiveContainer[] template, float threshold = 0.65f)
     {
         float sizeCheck = (1.0f / template.Length) * 0.3f;
         int u = 0;
@@ -70,7 +70,7 @@ public class SketchOutput : MonoBehaviour
                     {
                         sketch[i].ConcaveUp = !sketch[i].ConcaveUp;
                     }
-                    if (thresholdCheck(sketch[i].Completeness, template[u].Completeness, threshold) &&
+                    if (thresholdCheck(sketch[i].Completeness, template[u].Completeness, 0.4f) &&
                         sketch[i].ConcaveUp == template[u].ConcaveUp)
                     {
                         u += 1;
@@ -134,7 +134,7 @@ public class SketchOutput : MonoBehaviour
 
     // Spell Raw Data
     public static PrimitiveContainer[] fire = { new PrimitiveContainer(0, 0.0f, 0.457411557f, false, 0.0f),
-                                                new PrimitiveContainer(0, 3.90409064f, 0.3343333f, false, 0.0f),
+                                                new PrimitiveContainer(0, 3.5f, 0.3343333f, false, 0.0f),
                                                 new PrimitiveContainer(1, 1.798421f, 0.208255142f, true,
                                                                        0.408551544f) };
     public static PrimitiveContainer[] lightning = { new PrimitiveContainer(0, 0.0f, 0.4076188f, false, 0.0f),
