@@ -35,7 +35,7 @@ public class PreRecognition : MonoBehaviour
         for (int i = 1; i < points.Length; i++)
         {
             if (Vector3.Distance(points[currentCorner], points[i]) / (lineLength[i] - lineLength[currentCorner]) <=
-                0.9f)
+                0.91f)
             {
                 currentCorner = i;
                 cornerList.Add(i);

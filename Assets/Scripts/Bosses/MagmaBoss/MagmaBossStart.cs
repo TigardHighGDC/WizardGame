@@ -9,7 +9,7 @@ public class MagmaBossStart : MonoBehaviour
 
     private void Update()
     {
-        if(EnemySpawner == null)
+        if (EnemySpawner == null)
         {
             Boss.SetActive(true);
             Destroy(gameObject);

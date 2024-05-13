@@ -13,7 +13,7 @@ public class HighLevelRecognition : MonoBehaviour
     static float NDDE;
     static int[] corners;
     static float[] direction;
-    
+
     public static float RadianConvert(float radian)
     {
         radian = radian % (2 * Mathf.PI);
@@ -33,19 +33,19 @@ public class HighLevelRecognition : MonoBehaviour
         List<PrimitiveContainer> primitives = new List<PrimitiveContainer>();
         direction = PreRecognition.DirectionChangeCalculator(points);
         corners = PreRecognition.CornerCalculator(points, PreRecognition.LineLengthCalculator(points),
-                                                        PreRecognition.CurvatureCalculator(points, direction));
+                                                  PreRecognition.CurvatureCalculator(points, direction));
         int i = 2;
         while (i < corners.Length)
         {
-            CalculateIndicators(i-2, i, points);
-            if (circle[0] < lineDeviation && DCR < 3.0f && NDDE > 0.8f)
+            CalculateIndicators(i - 2, i, points);
+            if (circle[0] < lineDeviation && DCR < 3.5f && NDDE > 0.8f && circle[1] > 0.1f)
             {
                 // Is Arc, Keep going
                 int current = i;
                 for (int u = i + 1; u < corners.Length; u++)
                 {
-                    CalculateIndicators(i-2, u, points);
-                    if (circle[0] < lineDeviation && circle[1] < 1.2 && DCR < 3.0f && NDDE > 0.85f)
+                    CalculateIndicators(i - 2, u, points);
+                    if (circle[0] < lineDeviation && circle[1] < 1.2 && DCR < 3.5f && NDDE > 0.85f && circle[0] < 0.5f)
                     {
                         current = u;
                         continue;
@@ -68,28 +68,28 @@ public class HighLevelRecognition : MonoBehaviour
                 }
                 else
                 {
-                    primitives.Add(LineCreator(i-2, i, points));
+                    primitives.Add(LineCreator(i - 2, i, points));
                 }
                 i = current + 2;
             }
             else if (DCR > 3.5f || lineDeviation > 0.2f)
             {
                 // Is Polyline
-                primitives.Add(LineCreator(i-1, i-2, points));
+                primitives.Add(LineCreator(i - 1, i - 2, points));
                 i += 1;
             }
             else
             {
                 // Is Line
-                primitives.Add(LineCreator(i, i-2, points));
+                primitives.Add(LineCreator(i, i - 2, points));
                 i += 2;
             }
         }
         if (i == corners.Length)
         {
-            primitives.Add(LineCreator(i-1, i-2, points));
+            primitives.Add(LineCreator(i - 1, i - 2, points));
         }
-        
+
         // Set the first rotation to 0, and the rest to the difference between the first and the current
         float rotationStart = primitives[0].Rotation;
         primitives[0].Rotation = 0.0f;

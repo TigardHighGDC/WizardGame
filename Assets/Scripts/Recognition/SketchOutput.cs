@@ -8,6 +8,11 @@ public class SketchOutput : MonoBehaviour
 {
     public static string Output(PrimitiveContainer[] sketch)
     {
+        Debug.Log("Type");
+        foreach (PrimitiveContainer i in sketch)
+        {
+            Debug.Log(i.Type);
+        }
         if (Compare(sketch, water))
         {
             return "water";
@@ -36,17 +41,12 @@ public class SketchOutput : MonoBehaviour
         return "";
     }
 
-    public static bool Compare(PrimitiveContainer[] sketch, PrimitiveContainer[] template, float threshold = 0.65f)
+    public static bool Compare(PrimitiveContainer[] sketch, PrimitiveContainer[] template, float threshold = 0.6f)
     {
-        float sizeCheck = (1.0f / sketch.Length) * 0.3f;
+        float sizeCheck = (1.0f / sketch.Length) * 0.35f;
         int u = 0;
         bool? concaveReverse = null;
         float prevRotation = -10f;
-        Debug.Log("Primitives");
-        foreach (PrimitiveContainer p in sketch)
-        {
-            Debug.Log(p.Length);
-        }
 
         for (int i = 0; i < sketch.Length; i++)
         {
@@ -62,7 +62,7 @@ public class SketchOutput : MonoBehaviour
             }
             else
             {
-                prevRotation = sketch[i-1].Rotation;
+                prevRotation = sketch[i - 1].Rotation;
             }
 
             if (template.Length == u)
@@ -74,7 +74,7 @@ public class SketchOutput : MonoBehaviour
                 return false;
             }
             if (thresholdCheck(sketch[i].Length, template[u].Length, threshold) &&
-                radianThresholdCheck(sketch, template, i, u, 0.7f, prevRotation))
+                radianThresholdCheck(sketch, template, i, u, 1.0f, prevRotation))
             {
                 if (sketch[i].Type == 1)
                 {
@@ -86,7 +86,7 @@ public class SketchOutput : MonoBehaviour
                     {
                         sketch[i].ConcaveUp = !sketch[i].ConcaveUp;
                     }
-                    if (completenessCheck(sketch[i].Completeness, template[u].Completeness, 0.2f) &&
+                    if (completenessCheck(sketch[i].Completeness, template[u].Completeness, 0.35f) &&
                         sketch[i].ConcaveUp == template[u].ConcaveUp)
                     {
                         u += 1;
@@ -105,6 +105,14 @@ public class SketchOutput : MonoBehaviour
             {
                 return false;
             }
+        }
+        while (u < template.Length)
+        {
+            if (sketch[u].Length > sizeCheck)
+            {
+                break;
+            }
+            u += 1;
         }
         return template.Length == u;
     }

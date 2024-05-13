@@ -90,8 +90,8 @@ public class LineDrawer : MonoBehaviour
 
             float[] direction = PreRecognition.DirectionChangeCalculator(points);
             float[] curvature = PreRecognition.CurvatureCalculator(points, direction);
-            int[] corners = PreRecognition.CornerCalculator(points, PreRecognition.LineLengthCalculator(points),
-            curvature);
+            int[] corners =
+                PreRecognition.CornerCalculator(points, PreRecognition.LineLengthCalculator(points), curvature);
             RecognizerDebuger.Instance.DeleteDebug();
             foreach (int corner in corners)
             {
