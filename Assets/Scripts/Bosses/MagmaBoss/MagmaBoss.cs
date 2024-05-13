@@ -36,7 +36,7 @@ public class MagmaBoss : MonoBehaviour
         if (DialogueBox.Instance.IsTalking)
         {
             return;
-        }   
+        }
 
         if (beginDialogue)
         {
@@ -66,7 +66,7 @@ public class MagmaBoss : MonoBehaviour
             }
         }
         yield return new WaitForSeconds(3.0f);
-        
+
         anim.Play("None");
         canAttack = true;
     }
@@ -79,14 +79,14 @@ public class MagmaBoss : MonoBehaviour
         float timer = 0.0f;
         while (timer < 2.0f)
         {
-            line.SetPositions(new Vector3[]{Player.Instance.gameObject.transform.position, transform.position});
+            line.SetPositions(new Vector3[] { Player.Instance.gameObject.transform.position, transform.position });
             timer += Time.deltaTime;
             yield return new WaitForEndOfFrame();
         }
         Vector3 direction = (Player.Instance.transform.position - transform.position).normalized;
-        GameObject bullet = Instantiate(FireBall, transform.position, Quaternion.FromToRotation(transform.up, direction));
+        GameObject bullet =
+            Instantiate(FireBall, transform.position, Quaternion.FromToRotation(transform.up, direction));
         bullet.GetComponent<Rigidbody2D>().velocity = direction * 15.0f;
         Laser.SetActive(false);
-
     }
 }
