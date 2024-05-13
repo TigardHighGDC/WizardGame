@@ -84,6 +84,21 @@ public class LineDrawer : MonoBehaviour
             {
                 AddPoint(currentLine, touch.position);
             }
+
+            Vector3[] points = new Vector3[currentLine.positionCount];
+            currentLine.GetPositions(points);
+
+            float[] direction = PreRecognition.DirectionChangeCalculator(points);
+            float[] curvature = PreRecognition.CurvatureCalculator(points, direction);
+            int[] corners = PreRecognition.CornerCalculator(points, PreRecognition.LineLengthCalculator(points),
+            curvature);
+            RecognizerDebuger.Instance.DeleteDebug();
+            foreach (int corner in corners)
+            {
+                Vector3 cornerPosition = points[corner];
+                RecognizerDebuger.Instance.CornerDebuger(cornerPosition);
+            }
+
             break;
         case TouchPhase.Ended:
             // Recognize spell

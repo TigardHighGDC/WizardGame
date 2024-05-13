@@ -38,9 +38,15 @@ public class SketchOutput : MonoBehaviour
 
     public static bool Compare(PrimitiveContainer[] sketch, PrimitiveContainer[] template, float threshold = 0.65f)
     {
-        float sizeCheck = (1.0f / template.Length) * 0.3f;
+        float sizeCheck = (1.0f / sketch.Length) * 0.3f;
         int u = 0;
         bool? concaveReverse = null;
+        float prevRotation = -10f;
+        Debug.Log("Primitives");
+        foreach (PrimitiveContainer p in sketch)
+        {
+            Debug.Log(p.Length);
+        }
 
         for (int i = 0; i < sketch.Length; i++)
         {
@@ -49,6 +55,16 @@ public class SketchOutput : MonoBehaviour
             {
                 continue;
             }
+
+            if (prevRotation == -10.0f)
+            {
+                prevRotation = sketch[i].Rotation;
+            }
+            else
+            {
+                prevRotation = sketch[i-1].Rotation;
+            }
+
             if (template.Length == u)
             {
                 return false;
@@ -58,7 +74,7 @@ public class SketchOutput : MonoBehaviour
                 return false;
             }
             if (thresholdCheck(sketch[i].Length, template[u].Length, threshold) &&
-                radianThresholdCheck(sketch, template, u, 0.7f))
+                radianThresholdCheck(sketch, template, i, u, 0.7f, prevRotation))
             {
                 if (sketch[i].Type == 1)
                 {
@@ -70,10 +86,14 @@ public class SketchOutput : MonoBehaviour
                     {
                         sketch[i].ConcaveUp = !sketch[i].ConcaveUp;
                     }
-                    if (thresholdCheck(sketch[i].Completeness, template[u].Completeness, 0.4f) &&
+                    if (completenessCheck(sketch[i].Completeness, template[u].Completeness, 0.2f) &&
                         sketch[i].ConcaveUp == template[u].ConcaveUp)
                     {
                         u += 1;
+                    }
+                    else
+                    {
+                        return false;
                     }
                 }
                 else
@@ -94,21 +114,26 @@ public class SketchOutput : MonoBehaviour
         return a * (1 - threshold) < b && a * (1 + threshold) > b;
     }
 
-    private static bool radianThresholdCheck(PrimitiveContainer[] sketch, PrimitiveContainer[] template, int index,
-                                             float radianThreshold)
+    private static bool completenessCheck(float a, float b, float threshold)
     {
-        float a = sketch[index].Rotation;
-        float b = template[index].Rotation;
-        if (index > 0)
-        {
-            // Takes directional change into account
-            a -= sketch[index - 1].Rotation;
-            b -= template[index - 1].Rotation;
+        return a - threshold < b && a + threshold > b;
+    }
 
-            // Removes negative values
-            a = (a + (Mathf.PI * 4)) % (Mathf.PI * 2);
-            b = (b + (Mathf.PI * 4)) % (Mathf.PI * 2);
+    private static bool radianThresholdCheck(PrimitiveContainer[] sketch, PrimitiveContainer[] template, int i, int u,
+                                             float radianThreshold, float prevRotation)
+    {
+        float a = sketch[i].Rotation;
+        float b = template[u].Rotation;
+
+        a -= prevRotation;
+        if (u > 0)
+        {
+            b -= template[u - 1].Rotation;
         }
+
+        // Removes negative values
+        a = (a + (Mathf.PI * 4)) % (Mathf.PI * 2);
+        b = (b + (Mathf.PI * 4)) % (Mathf.PI * 2);
 
         if (b + radianThreshold > 2 * Mathf.PI)
         {

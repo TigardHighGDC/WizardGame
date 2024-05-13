@@ -147,3 +147,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4943222137739f4dac023bf5bfe8bdb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  FightMode: 0
+  debugObject: {fileID: 8436342362251790789, guid: 36301c8c8d0592e4f9b221b3e3a2dbfb, type: 3}
