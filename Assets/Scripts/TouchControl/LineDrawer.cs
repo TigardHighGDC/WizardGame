@@ -63,7 +63,7 @@ public class LineDrawer : MonoBehaviour
                 break;
             }
         }
-        
+
         Touch touch = Input.GetTouch(touchIndex);
 
         if (spellStorage != "")
