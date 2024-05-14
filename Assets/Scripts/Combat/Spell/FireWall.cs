@@ -17,9 +17,9 @@ public class FireWall : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collider)
     {
-        if ((collider.tag == "Enemy" || collider.tag == "Interactable") && collider.isTrigger)
+        if (collider.tag == "Enemy" && collider.isTrigger)
         {
-            collider.gameObject.GetComponent<EnemyHealth>().burning = 0.5f;
+            collider.gameObject.GetComponent<EnemyHealth>().TakeDamage(10f * Time.deltaTime);
         }
     }
 }

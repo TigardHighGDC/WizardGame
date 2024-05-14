@@ -12,7 +12,6 @@ TagManager:
   - Enemy
   - Wall
   - Spell
-  - Interactable
   layers:
   - Default
   - TransparentFX

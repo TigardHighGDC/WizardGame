@@ -62,7 +62,7 @@ public class HighLevelRecognition : MonoBehaviour
             }
             else
             {
-                if (circle[0] < lineDeviation && DCR < 3.5f && NDDE > 0.8f)
+                if (circle[0] < lineDeviation && DCR < 3.5f && NDDE > 0.75f)
                 {
                     // Is Arc, Keep going
                     int current = i;

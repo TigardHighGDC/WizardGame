@@ -6,8 +6,8 @@ public class CloudEnemy : BasicEnemy
 {
     public GameObject lightningBolt;
 
-    private float minAttack = 2.0f;
-    private float maxAttack = 4.0f;
+    private float minAttack = 1.0f;
+    private float maxAttack = 2.0f;
     private float attackTimer = 1.0f;
 
     private void Update()

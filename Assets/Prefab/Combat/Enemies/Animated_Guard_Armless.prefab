@@ -275,7 +275,6 @@ MonoBehaviour:
   chasePlayer: 1
   speed: 0.25
   MaxAcceleration: 3
-  directionSwap: -1
 --- !u!50 &3693672397407546934
 Rigidbody2D:
   serializedVersion: 4
@@ -316,7 +315,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MaxHealth: 75
-  burning: 0
   currentHealth: 0
 --- !u!114 &4347723215265381208
 MonoBehaviour:
@@ -330,7 +328,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef3278065f161d14480e2119fa7ab141, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 10
 --- !u!61 &594776010980651676
 BoxCollider2D:
   m_ObjectHideFlags: 0

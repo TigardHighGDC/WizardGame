@@ -95,6 +95,9 @@ public class Player : MonoBehaviour
             GameObject earth =
                 Instantiate(earthquake, transform.position, Quaternion.FromToRotation(transform.up, direction));
             break;
+        case "shield":
+            PlayerHealth.Instance.SetInvincability(1.5f);
+            break;
         }
         DestroyAura();
     }
