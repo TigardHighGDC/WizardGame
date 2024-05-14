@@ -42,7 +42,7 @@ public class SketchOutput : MonoBehaviour
         int u = 0;
         bool? concaveReverse = null;
         float prevRotation = -10f;
-        
+
         for (int i = 0; i < sketch.Length; i++)
         {
             // Removes small lines

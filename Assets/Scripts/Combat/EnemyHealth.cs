@@ -55,7 +55,7 @@ public class EnemyHealth : MonoBehaviour
             yield return new WaitForSeconds(0.02f);
         }
 
-        for (int i = 0; i < 5; i++)
+        for (int i = 0; i <= 5; i++)
         {
             sprite.color = new Color(1f, 1f, 1f, 0.5f + (i * 0.1f));
             for (int child = 0; child < transform.childCount; child++)

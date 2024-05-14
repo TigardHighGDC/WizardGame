@@ -5,120 +5,222 @@ using UnityEngine;
 public class TouchInputPriority : MonoBehaviour
 {
     public bool FightMode = false;
+    public LineDrawer lineDrawer;
 
     private bool joystickStart = false;
-    private int touchId = -1;
-    private int touchIndex = -1;
-    private bool findTouch = true;
-    // Update is called once per frame
+
+    // Stores the touch id of the touch that is currently being tracked
+    private int leftTouchId = -1;
+    private int leftTouchIndex = -1;
+    private bool leftFindTouch = true;
+
+    private int rightTouchId = -1;
+    private int rightTouchIndex = -1;
+    private bool rightFindTouch = true;
+
     void Update()
     {
         if (Input.touchCount > 0)
         {
-            if (findTouch)
+            if (leftFindTouch)
             {
-                touchIndex = -1;
+                leftTouchIndex = -1;
                 for (int i = 0; i < Input.touchCount; i++)
                 {
                     if (Input.GetTouch(i).phase == TouchPhase.Began &&
                         (AdjustPointToScreen(8, Input.GetTouch(i).position).x < 0.0f || !FightMode))
                     {
-                        touchId = Input.GetTouch(i).fingerId;
-                        findTouch = false;
+                        leftTouchId = Input.GetTouch(i).fingerId;
+                        leftFindTouch = false;
                         break;
                     }
                 }
             }
-            if (findTouch)
+
+            for (int i = 0; i < Input.touchCount; i++)
             {
-                return;
+                if (Input.GetTouch(i).fingerId == leftTouchId)
+                {
+                    leftTouchIndex = i;
+                    break;
+                }
+            }
+
+            if (rightFindTouch)
+            {
+                rightTouchIndex = -1;
+                for (int i = 0; i < Input.touchCount; i++)
+                {
+                    if (Input.GetTouch(i).phase == TouchPhase.Began &&
+                        (AdjustPointToScreen(8, Input.GetTouch(i).position).x > 0.0f || !FightMode))
+                    {
+                        rightTouchId = Input.GetTouch(i).fingerId;
+                        rightFindTouch = false;
+                        break;
+                    }
+                }
             }
 
             for (int i = 0; i < Input.touchCount; i++)
             {
-                if (Input.GetTouch(i).fingerId == touchId)
+                if (Input.GetTouch(i).fingerId == rightTouchId)
                 {
-                    touchIndex = i;
+                    rightTouchIndex = i;
                     break;
                 }
             }
 
-            Touch touch = Input.GetTouch(touchIndex);
-            // Handle finger movements based on TouchPhase
-            switch (touch.phase)
+            if (leftTouchIndex != -1 && !leftFindTouch)
             {
-            // When a touch has first been detected, change the message and record the starting position
-            case TouchPhase.Began:
-
-                if (DialogueBox.Instance.IsTalking)
+                Touch leftTouch = Input.GetTouch(leftTouchIndex);
+                // Handle finger movements based on TouchPhase
+                switch (leftTouch.phase)
                 {
-                    DialogueBox.Instance.NextParagraph();
+                // When a touch has first been detected, change the message and record the starting position
+                case TouchPhase.Began:
+
+                    if (DialogueBox.Instance.IsTalking)
+                    {
+                        DialogueBox.Instance.NextParagraph();
+                        leftFindTouch = true;
+                        break;
+                    }
+
+                    // Adds camera position to the touch position
+                    Vector3 adjustedTouch = AdjustPointToScreen(8, leftTouch.position);
+                    Collider2D[] colliders = Physics2D.OverlapPointAll(adjustedTouch + transform.position);
+                    Dictionary<string, GameObject> tag = new Dictionary<string, GameObject>();
+                    foreach (Collider2D collider in colliders)
+                    {
+                        tag.Add(collider.gameObject.tag, collider.gameObject);
+                    }
+
+                    if (tag.ContainsKey("NPC"))
+                    {
+                        DialogueStorage speech = tag["NPC"].GetComponent<DialogueStorage>();
+                        DialogueBox.Instance.StartDialogue(speech.Dialogue, speech.Sprite);
+                        lineDrawer.LineCancel();
+                        MovementJoystickEnd();
+                        leftFindTouch = true;
+                        lineDrawer.SpellCancel();
+                    }
+                    else
+                    {
+                        MovementJoystickStart(adjustedTouch);
+                    }
+                    break;
+                case TouchPhase.Moved:
+                    MovementJoystickMove(leftTouch);
+                    break;
+
+                case TouchPhase.Ended:
+                    MovementJoystickEnd();
+                    leftFindTouch = true;
+                    break;
+
+                case TouchPhase.Canceled:
+                    MovementJoystickEnd();
+                    leftFindTouch = true;
                     break;
                 }
-                // Adds camera position to the touch position
-                Vector3 adjustedTouch = AdjustPointToScreen(8, touch.position);
-
-                Collider2D[] colliders = Physics2D.OverlapPointAll(adjustedTouch + transform.position);
-                Dictionary<string, GameObject> tag = new Dictionary<string, GameObject>();
-                foreach (Collider2D collider in colliders)
-                {
-                    tag.Add(collider.gameObject.tag, collider.gameObject);
-                }
-                // priority interactions
-                if (tag.ContainsKey("Item"))
-                {
-                    break;
-                }
-                else if (tag.ContainsKey("NPC"))
-                {
-                    DialogueStorage speech = tag["NPC"].GetComponent<DialogueStorage>();
-                    DialogueBox.Instance.StartDialogue(speech.Dialogue, speech.Sprite);
-                }
-                else if (tag.ContainsKey("Quit"))
-                {
-                    Debug.Log("Quit");
-                    Application.Quit();
-                }
-                // if nothing clicked move joystick to touch position
-                else
-                {
-                    joystickStart = true;
-                    MovementJoystick.Instance.Show();
-                    Vector3 position = adjustedTouch;
-                    MovementJoystick.Instance.SetJoystick(position);
-                    MovementJoystick.Instance.SetJoystickCenterPoint(position);
-                }
-                break;
-            case TouchPhase.Moved:
-                if (joystickStart)
-                {
-                    MovementJoystick.Instance.SetJoystickCenterPoint(AdjustPointToScreen(8, touch.position));
-                }
-                break;
-
-            // Determine if the touch is a moving touch
-            case TouchPhase.Ended:
-                if (joystickStart)
-                {
-                    MovementJoystick.Instance.SetJoystickCenterPoint(
-                        MovementJoystick.Instance.joystick.transform.localPosition);
-                    MovementJoystick.Instance.Hide();
-                    joystickStart = false;
-                }
-                findTouch = true;
-                break;
-
-            case TouchPhase.Canceled:
-                if (joystickStart)
-                {
-                    MovementJoystick.Instance.SetJoystickCenterPoint(
-                        MovementJoystick.Instance.joystick.transform.localPosition);
-                    MovementJoystick.Instance.Hide();
-                    joystickStart = false;
-                }
-                findTouch = true;
-                break;
             }
+            else
+            {
+                leftFindTouch = true;
+                MovementJoystickEnd();
+            }
+
+            if (rightTouchIndex != -1 && !rightFindTouch)
+            {
+                Touch rightTouch = Input.GetTouch(rightTouchIndex);
+                if (lineDrawer.spellStorage != "" && !DialogueBox.Instance.IsTalking)
+                {
+                    rightFindTouch = lineDrawer.SpellCast(rightTouch);
+                    return;
+                }
+                // Handle finger movements based on TouchPhase
+                switch (rightTouch.phase)
+                {
+                // When a touch has first been detected, change the message and record the starting position
+                case TouchPhase.Began:
+                    if (DialogueBox.Instance.IsTalking)
+                    {
+                        DialogueBox.Instance.NextParagraph();
+                        rightFindTouch = true;
+                        break;
+                    }
+
+                    // Adds camera position to the touch position
+                    Vector3 adjustedTouch = AdjustPointToScreen(8, rightTouch.position);
+                    Collider2D[] colliders = Physics2D.OverlapPointAll(adjustedTouch + transform.position);
+                    Dictionary<string, GameObject> tag = new Dictionary<string, GameObject>();
+                    foreach (Collider2D collider in colliders)
+                    {
+                        tag.Add(collider.gameObject.tag, collider.gameObject);
+                    }
+
+                    if (tag.ContainsKey("NPC"))
+                    {
+                        DialogueStorage speech = tag["NPC"].GetComponent<DialogueStorage>();
+                        DialogueBox.Instance.StartDialogue(speech.Dialogue, speech.Sprite);
+                        lineDrawer.LineCancel();
+                        MovementJoystickEnd();
+                        rightFindTouch = true;
+                        lineDrawer.SpellCancel();
+                    }
+                    else
+                    {
+                        lineDrawer.LineBegin(rightTouch);
+                    }
+                    break;
+
+                case TouchPhase.Moved:
+                    lineDrawer.LineMove(rightTouch);
+                    break;
+
+                case TouchPhase.Ended:
+                    lineDrawer.LineEnd();
+                    rightFindTouch = true;
+                    break;
+
+                case TouchPhase.Canceled:
+                    lineDrawer.LineCancel();
+                    rightFindTouch = true;
+                    break;
+                }
+            }
+            else
+            {
+                rightFindTouch = true;
+                lineDrawer.LineCancel();
+            }
+        }
+    }
+
+    private void MovementJoystickStart(Vector3 position)
+    {
+        joystickStart = true;
+        MovementJoystick.Instance.Show();
+        MovementJoystick.Instance.SetJoystick(position);
+        MovementJoystick.Instance.SetJoystickCenterPoint(position);
+    }
+
+    private void MovementJoystickMove(Touch touch)
+    {
+        if (joystickStart)
+        {
+            MovementJoystick.Instance.SetJoystickCenterPoint(AdjustPointToScreen(8, touch.position));
+        }
+    }
+
+    private void MovementJoystickEnd()
+    {
+        if (joystickStart)
+        {
+            MovementJoystick.Instance.SetJoystickCenterPoint(
+                MovementJoystick.Instance.joystick.transform.localPosition);
+            MovementJoystick.Instance.Hide();
+            joystickStart = false;
         }
     }
 
