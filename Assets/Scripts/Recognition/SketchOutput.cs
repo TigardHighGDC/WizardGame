@@ -36,11 +36,12 @@ public class SketchOutput : MonoBehaviour
         return "";
     }
 
-    public static bool Compare(PrimitiveContainer[] sketch, PrimitiveContainer[] template, float threshold = 0.65f)
+    public static bool Compare(PrimitiveContainer[] sketch, PrimitiveContainer[] template, float threshold = 0.7f)
     {
-        float sizeCheck = (1.0f / template.Length) * 0.3f;
+        float sizeCheck = (1.0f / sketch.Length) * 0.35f;
         int u = 0;
         bool? concaveReverse = null;
+        float prevRotation = -10f;
 
         for (int i = 0; i < sketch.Length; i++)
         {
@@ -49,6 +50,16 @@ public class SketchOutput : MonoBehaviour
             {
                 continue;
             }
+
+            if (prevRotation == -10.0f)
+            {
+                prevRotation = sketch[i].Rotation;
+            }
+            else
+            {
+                prevRotation = sketch[i - 1].Rotation;
+            }
+
             if (template.Length == u)
             {
                 return false;
@@ -58,7 +69,7 @@ public class SketchOutput : MonoBehaviour
                 return false;
             }
             if (thresholdCheck(sketch[i].Length, template[u].Length, threshold) &&
-                radianThresholdCheck(sketch, template, u, 0.7f))
+                radianThresholdCheck(sketch, template, i, u, 0.9f, prevRotation))
             {
                 if (sketch[i].Type == 1)
                 {
@@ -70,10 +81,14 @@ public class SketchOutput : MonoBehaviour
                     {
                         sketch[i].ConcaveUp = !sketch[i].ConcaveUp;
                     }
-                    if (thresholdCheck(sketch[i].Completeness, template[u].Completeness, 0.4f) &&
+                    if (completenessCheck(sketch[i].Completeness, template[u].Completeness, 0.4f) &&
                         sketch[i].ConcaveUp == template[u].ConcaveUp)
                     {
                         u += 1;
+                    }
+                    else
+                    {
+                        return false;
                     }
                 }
                 else
@@ -86,6 +101,14 @@ public class SketchOutput : MonoBehaviour
                 return false;
             }
         }
+        while (u < sketch.Length)
+        {
+            if (sketch[u].Length > sizeCheck)
+            {
+                break;
+            }
+            u += 1;
+        }
         return template.Length == u;
     }
 
@@ -94,21 +117,26 @@ public class SketchOutput : MonoBehaviour
         return a * (1 - threshold) < b && a * (1 + threshold) > b;
     }
 
-    private static bool radianThresholdCheck(PrimitiveContainer[] sketch, PrimitiveContainer[] template, int index,
-                                             float radianThreshold)
+    private static bool completenessCheck(float a, float b, float threshold)
     {
-        float a = sketch[index].Rotation;
-        float b = template[index].Rotation;
-        if (index > 0)
-        {
-            // Takes directional change into account
-            a -= sketch[index - 1].Rotation;
-            b -= template[index - 1].Rotation;
+        return a - threshold < b && a + threshold > b;
+    }
 
-            // Removes negative values
-            a = (a + (Mathf.PI * 4)) % (Mathf.PI * 2);
-            b = (b + (Mathf.PI * 4)) % (Mathf.PI * 2);
+    private static bool radianThresholdCheck(PrimitiveContainer[] sketch, PrimitiveContainer[] template, int i, int u,
+                                             float radianThreshold, float prevRotation)
+    {
+        float a = sketch[i].Rotation;
+        float b = template[u].Rotation;
+
+        a -= prevRotation;
+        if (u > 0)
+        {
+            b -= template[u - 1].Rotation;
         }
+
+        // Removes negative values
+        a = (a + (Mathf.PI * 4)) % (Mathf.PI * 2);
+        b = (b + (Mathf.PI * 4)) % (Mathf.PI * 2);
 
         if (b + radianThreshold > 2 * Mathf.PI)
         {
@@ -133,19 +161,16 @@ public class SketchOutput : MonoBehaviour
     }
 
     // Spell Raw Data
-    public static PrimitiveContainer[] fire = { new PrimitiveContainer(0, 0.0f, 0.457411557f, false, 0.0f),
-                                                new PrimitiveContainer(0, 3.5f, 0.3343333f, false, 0.0f),
-                                                new PrimitiveContainer(1, 1.798421f, 0.208255142f, true,
-                                                                       0.408551544f) };
-    public static PrimitiveContainer[] lightning = { new PrimitiveContainer(0, 0.0f, 0.4076188f, false, 0.0f),
-                                                     new PrimitiveContainer(0, 2.40771317f, 0.368411481f, false, 0.0f),
-                                                     new PrimitiveContainer(0, 6.26135445f, 0.223969668f, false,
-                                                                            0.0f) };
+    public static PrimitiveContainer[] fire = { new PrimitiveContainer(0, 0.0f, 0.377f, false, 0.0f),
+                                                new PrimitiveContainer(0, 3.8f, 0.33f, false, 0.0f),
+                                                new PrimitiveContainer(1, 1.77f, 0.293f, true, 0.43f) };
+    public static PrimitiveContainer[] lightning = { new PrimitiveContainer(0, 0.0f, 0.4030763f, false, 0.0f),
+                                                     new PrimitiveContainer(0, 2.4f, 0.1951601f, false, 0.0f),
+                                                     new PrimitiveContainer(0, 6.26135445f, 0.4017636f, false, 0.0f) };
     public static PrimitiveContainer[] shield = { new PrimitiveContainer(1, 0.0f, 1.0f, false, 1.0f) };
-    public static PrimitiveContainer[] water = { new PrimitiveContainer(1, 0.0f, 0.5047563f, true, 0.8546553f),
-                                                 new PrimitiveContainer(1, 0.5974314f, 0.495243728f, true,
-                                                                        0.505029261f) };
-    public static PrimitiveContainer[] earth = { new PrimitiveContainer(0, 0.0f, 0.41f, false, 0.0f),
-                                                 new PrimitiveContainer(0, 4.697068f, 0.39f, false, 0.0f),
-                                                 new PrimitiveContainer(0, 3.5f, 0.2f, false, 0.0f) };
+    public static PrimitiveContainer[] water = { new PrimitiveContainer(1, 0.0f, 0.5302945f, true, 0.8f),
+                                                 new PrimitiveContainer(1, 0.4f, 0.469705522f, true, 0.6f) };
+    public static PrimitiveContainer[] earth = { new PrimitiveContainer(0, 0.0f, 0.35f, false, 0.0f),
+                                                 new PrimitiveContainer(0, 4.67f, 0.32f, false, 0.0f),
+                                                 new PrimitiveContainer(0, 3.2f, 0.324f, false, 0.0f) };
 }

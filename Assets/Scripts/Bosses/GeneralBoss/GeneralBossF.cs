@@ -10,7 +10,7 @@ public class GeneralBossF : BasicEnemy
     public GameObject guard;
 
     private bool swapScatter = false;
-    private int maxShots = 20;
+    private int maxShots = 30;
     private int numShots = 10;
     private bool canAttack = true;
 

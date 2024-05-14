@@ -434,6 +434,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   FightMode: 1
+  lineDrawer: {fileID: 3097425018159771847}
 --- !u!1 &6028586840163581925
 GameObject:
   m_ObjectHideFlags: 0
@@ -937,6 +938,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9bfd9c62c84e72e4a91cc92140c1fa0d, type: 3}
+--- !u!114 &3097425018159771847 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2121914630852398314, guid: 9bfd9c62c84e72e4a91cc92140c1fa0d, type: 3}
+  m_PrefabInstance: {fileID: 4003363317031337005}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4943222137739f4dac023bf5bfe8bdb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &7687340633577886120 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6710405407982841221, guid: 9bfd9c62c84e72e4a91cc92140c1fa0d, type: 3}

@@ -34,9 +34,8 @@ public class PreRecognition : MonoBehaviour
         // Caculates corner range by comparing the distance between points and the line length
         for (int i = 1; i < points.Length; i++)
         {
-            // 0.955 doesn't over create points
             if (Vector3.Distance(points[currentCorner], points[i]) / (lineLength[i] - lineLength[currentCorner]) <=
-                0.9f)
+                0.87f)
             {
                 currentCorner = i;
                 cornerList.Add(i);
@@ -54,11 +53,11 @@ public class PreRecognition : MonoBehaviour
         for (int cornerIndex = 1; cornerIndex < count; cornerIndex++)
         {
             int start = (int)cornerList[cornerIndex] -
-                        (int)Mathf.Ceil((cornerList[cornerIndex] - cornerList[cornerIndex - 1]) / 2.65f);
+                        (int)Mathf.Ceil((cornerList[cornerIndex] - cornerList[cornerIndex - 1]) / 1.5f);
             start = Mathf.Max(0, start);
 
             int end = (int)cornerList[cornerIndex] +
-                      (int)Mathf.Ceil((cornerList[cornerIndex + 1] - cornerList[cornerIndex]) / 2.65f);
+                      (int)Mathf.Ceil((cornerList[cornerIndex + 1] - cornerList[cornerIndex]) / 3f);
             end = Mathf.Min(points.Length, end);
             float max = 0.0f;
             int maxIndex = 0;
@@ -111,58 +110,6 @@ public class PreRecognition : MonoBehaviour
 
         return deviationPercent / curvatureTrim.Length;
     }
-
-    // public static int[] ArcDifferentiantion(float[] curvature, int[] corners, Vector3[] points)
-    // {
-    //     List<int> arcList = new List<int>();
-    //     int i = 0;
-    //     int u = 2;
-    //     float[] directionArray = PreRecognition.DirectionChangeCalculator(points);
-
-    //     while (u < corners.Length)
-    //     {
-    //         Vector3[] pointSlice = new ArraySegment<Vector3>(points, corners[i], corners[u] - corners[i]).ToArray();
-    //         float[] directionSlice = new ArraySegment<float>(directionArray, corners[i], corners[u] -
-    //         corners[i]).ToArray();
-
-    //         float NDDE = PreRecognition.NDDE_Calculator(directionSlice, pointSlice);
-    //         float DCR = PreRecognition.DCR_Calculator(directionSlice);
-
-    //         if (DCR < 3.2f && NDDE > 0.7f)
-    //         {
-    //             u += 1;
-    //         }
-    //         else if (ShapeRecognition.IsLine(pointSlice))
-    //         {
-    //             arcList.Add(0);
-    //             i = u;
-    //             u += 2;
-    //         }
-    //         else
-    //         {
-    //             if (u - i > 2)
-    //             {
-    //                 arcList.Add(1);
-    //             }
-    //             else
-    //             {
-    //                 arcList.Add(0);
-    //             }
-    //             i = u - 1;
-    //             u = i + 2;
-    //         }
-    //     }
-
-    //     if (u - i > 2)
-    //     {
-    //         arcList.Add(1);
-    //     }
-    //     else if (corners.Length - 1 > i)
-    //     {
-    //         arcList.Add(0);
-    //     }
-    //     return arcList.ToArray();
-    // }
 
     public static float[] DirectionChangeCalculator(Vector3[] points)
     {

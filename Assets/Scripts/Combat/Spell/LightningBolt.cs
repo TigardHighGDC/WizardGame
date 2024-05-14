@@ -15,7 +15,10 @@ public class LightningBolt : MonoBehaviour
         if (collision.tag == "Enemy" && collision.isTrigger)
         {
             collision.GetComponent<EnemyHealth>().TakeDamage(35.0f);
-            collision.GetComponent<BasicEnemy>().StartStun();
+            if (collision.TryGetComponent<BasicEnemy>(out BasicEnemy enemy))
+            {
+                enemy.StartStun();
+            }
             Destroy(gameObject);
         }
         else if (collision.tag == "Wall")
