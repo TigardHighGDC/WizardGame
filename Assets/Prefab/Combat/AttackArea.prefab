@@ -62,7 +62,10 @@ MonoBehaviour:
   - {fileID: 3902031153246503406, guid: 6684b9a72bdc16a48a8236d3999617d0, type: 3}
   - {fileID: 5677651286098385296, guid: f20a8a42586bdd64e928dccd7bcb360b, type: 3}
   Wall: {fileID: 8188650158226832777}
-  enemyCount: 5
+  interval: 2
+  spawnWidth: 14
+  spawnHeight: 14
+  enemyCount: 3
 --- !u!1 &8188650158226832777
 GameObject:
   m_ObjectHideFlags: 0

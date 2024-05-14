@@ -11,7 +11,7 @@ TagManager:
   - Debug
   - Enemy
   - Wall
-  - Spell
+  - Interactable
   layers:
   - Default
   - TransparentFX

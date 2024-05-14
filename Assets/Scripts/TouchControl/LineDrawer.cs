@@ -6,12 +6,10 @@ public class LineDrawer : MonoBehaviour
 {
     public bool FightMode = false;
     public GameObject debugObject;
+    [HideInInspector]
+    public string spellStorage = "";
 
-    private string spellStorage = "";
-    private bool findTouch = true;
     private LineRenderer currentLine;
-    private int touchIndex = -1;
-    private int touchId = -1;
 
     private void Start()
     {
@@ -21,92 +19,59 @@ public class LineDrawer : MonoBehaviour
 
     private void Update()
     {
-        if (Input.touchCount == 0 || !FightMode)
+        // Does not need directional joystick
+        if (spellStorage == "shield")
         {
+            PlayerHealth.Instance.SetInvincability(2.0f);
+            spellStorage = "";
             return;
-        }
-
-        // Find a new touch object that has just been created
-        if (findTouch)
-        {
-            touchIndex = -1;
-            for (int i = 0; i < Input.touchCount; i++)
-            {
-                if (Input.GetTouch(i).phase == TouchPhase.Began &&
-                    AdjustPointToScreen(8, Input.GetTouch(i).position).x > 0.0f)
-                {
-                    touchId = Input.GetTouch(i).fingerId;
-                    findTouch = false;
-                    break;
-                }
-            }
-        }
-        if (findTouch)
-        {
-            return;
-        }
-
-        for (int i = 0; i < Input.touchCount; i++)
-        {
-            if (Input.GetTouch(i).fingerId == touchId)
-            {
-                touchIndex = i;
-                break;
-            }
-        }
-
-        Touch touch = Input.GetTouch(touchIndex);
-
-        if (spellStorage != "")
-        {
-            SpellCast(touch);
-            return;
-        }
-
-        // Draw Line
-        switch (touch.phase)
-        {
-        case TouchPhase.Began:
-            AddPoint(currentLine, touch.position);
-            break;
-        case TouchPhase.Moved:
-            if (Vector3.Distance(AdjustPointToScreen(8, touch.position),
-                                 currentLine.GetPosition(currentLine.positionCount - 1)) > 0.1f)
-            {
-                AddPoint(currentLine, touch.position);
-            }
-            break;
-        case TouchPhase.Ended:
-            // Recognize spell
-            Vector3[] points2 = new Vector3[currentLine.positionCount];
-            currentLine.GetPositions(points2);
-            PrimitiveContainer[] primitives = HighLevelRecognition.PrimitiveShapeGenerator(points2);
-            spellStorage = SketchOutput.Output(primitives);
-            currentLine.positionCount = 0;
-            findTouch = true;
-
-            // Set player aura
-            Player.Instance.GetComponent<Player>().CreateAura(spellStorage);
-            break;
-        case TouchPhase.Canceled:
-            currentLine.positionCount = 0;
-            findTouch = true;
-            break;
         }
     }
 
     private void RemoveDuplicates(LineRenderer lineRenderer)
     {
-        Vector3 previousPoint = lineRenderer.GetPosition(lineRenderer.positionCount - 2);
-        Vector3 currentPoint = lineRenderer.GetPosition(lineRenderer.positionCount - 1);
-        if (lineRenderer.positionCount <= 1)
+        if (lineRenderer.positionCount <= 2)
         {
             return;
         }
+        Vector3 previousPoint = lineRenderer.GetPosition(lineRenderer.positionCount - 2);
+        Vector3 currentPoint = lineRenderer.GetPosition(lineRenderer.positionCount - 1);
         if (previousPoint[0] == currentPoint[0] && previousPoint[1] == currentPoint[1])
         {
             lineRenderer.positionCount--;
         }
+    }
+
+    public void LineBegin(Touch touch)
+    {
+        AddPoint(currentLine, touch.position);
+    }
+
+    public void LineMove(Touch touch)
+    {
+        if (Vector3.Distance(AdjustPointToScreen(8, touch.position),
+                             currentLine.GetPosition(currentLine.positionCount - 1)) > 0.45f)
+        {
+            AddPoint(currentLine, touch.position);
+        }
+    }
+
+    public void LineEnd()
+    {
+        // Recognize spell
+        Vector3[] points2 = new Vector3[currentLine.positionCount];
+        currentLine.GetPositions(points2);
+        PrimitiveContainer[] primitives = HighLevelRecognition.PrimitiveShapeGenerator(points2);
+        spellStorage = SketchOutput.Output(primitives);
+        currentLine.positionCount = 0;
+
+        // Set player aura
+        Player.Instance.GetComponent<Player>().CreateAura(spellStorage);
+    }
+
+    public void LineCancel()
+    {
+        currentLine.positionCount = 0;
     }
 
     private void AddPoint(LineRenderer lineRenderer, Vector3 position)
@@ -127,8 +92,9 @@ public class LineDrawer : MonoBehaviour
 
         return position;
     }
-    private void SpellCast(Touch touch)
+    public bool SpellCast(Touch touch)
     {
+        // Creates joystick for player to set direction of spell
         switch (touch.phase)
         {
         case TouchPhase.Began:
@@ -136,11 +102,11 @@ public class LineDrawer : MonoBehaviour
             Vector3 position = AdjustPointToScreen(8, touch.position);
             DirectionJoystick.Instance.SetJoystick(position);
             DirectionJoystick.Instance.SetJoystickCenterPoint(position);
-            break;
+            return false;
 
         case TouchPhase.Moved:
             DirectionJoystick.Instance.SetJoystickCenterPoint(AdjustPointToScreen(8, touch.position));
-            break;
+            return false;
 
         case TouchPhase.Ended:
             Player.Instance.GetComponent<Player>().CastSpell(spellStorage);
@@ -148,8 +114,7 @@ public class LineDrawer : MonoBehaviour
             DirectionJoystick.Instance.SetJoystickCenterPoint(
                 DirectionJoystick.Instance.joystick.transform.localPosition);
             DirectionJoystick.Instance.Hide();
-            findTouch = true;
-            break;
+            return true;
 
         case TouchPhase.Canceled:
             Player.Instance.GetComponent<Player>().CastSpell(spellStorage);
@@ -157,9 +122,15 @@ public class LineDrawer : MonoBehaviour
             DirectionJoystick.Instance.SetJoystickCenterPoint(
                 DirectionJoystick.Instance.joystick.transform.localPosition);
             DirectionJoystick.Instance.Hide();
-            findTouch = true;
-            break;
+            return true;
         }
+        return false;
+    }
+
+    public void SpellCancel()
+    {
+        DirectionJoystick.Instance.SetJoystickCenterPoint(DirectionJoystick.Instance.joystick.transform.localPosition);
+        DirectionJoystick.Instance.Hide();
     }
     private void OnApplicationPause(bool pause)
     {

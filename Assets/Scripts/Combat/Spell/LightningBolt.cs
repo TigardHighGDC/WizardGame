@@ -4,17 +4,25 @@ using UnityEngine;
 
 public class LightningBolt : MonoBehaviour
 {
-    private void Update()
+    private void Start()
     {
-        transform.position = transform.position + transform.up * 10.0f * Time.deltaTime;
+        Rigidbody2D rb2d = GetComponent<Rigidbody2D>();
+        rb2d.velocity = transform.up * 10.0f;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag == "Enemy" && collision.isTrigger)
         {
-            collision.GetComponent<EnemyHealth>().TakeDamage(35.0f);
-            collision.GetComponent<BasicEnemy>().StartStun();
+            collision.GetComponent<EnemyHealth>().TakeDamage(35.0f, EnemyHealth.ElementType.Air);
+            if (collision.TryGetComponent<BasicEnemy>(out BasicEnemy enemy))
+            {
+                enemy.StartStun();
+            }
+            Destroy(gameObject);
+        }
+        else if (collision.tag == "Wall")
+        {
             Destroy(gameObject);
         }
     }
