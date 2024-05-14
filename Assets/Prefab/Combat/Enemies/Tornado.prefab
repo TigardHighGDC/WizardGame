@@ -167,6 +167,7 @@ MonoBehaviour:
   chasePlayer: 1
   speed: 1
   MaxAcceleration: 2.5
+  directionSwap: 1
 --- !u!114 &1150224006326806521
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -180,6 +181,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MaxHealth: 50
+  element: 0
   burning: 0
   currentHealth: 0
 --- !u!61 &7528600809740357141
@@ -218,7 +220,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 5.33, y: 8.06}
+    oldSize: {x: 1.338086, y: 2.015}
     newSize: {x: 5.33, y: 8.06}
     adaptiveTilingThreshold: 0.5
     drawMode: 0

@@ -25,7 +25,7 @@ public class WaterWave : MonoBehaviour
     {
         if (collision.tag == "Enemy" && collision.isTrigger)
         {
-            collision.GetComponent<EnemyHealth>().TakeDamage(15.0f);
+            collision.GetComponent<EnemyHealth>().TakeDamage(15.0f, EnemyHealth.ElementType.Water);
         }
         else if (collision.tag == "Wall")
         {

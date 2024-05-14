@@ -131,6 +131,7 @@ MonoBehaviour:
   chasePlayer: 1
   speed: 0.7
   MaxAcceleration: 2
+  directionSwap: 1
   lightningBolt: {fileID: 2118543378842851872, guid: ee755e513ec75b84f921b7a6c71189f7, type: 3}
 --- !u!61 &2058264337721102210
 BoxCollider2D:
@@ -168,7 +169,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.46, y: 1.51}
+    oldSize: {x: 1.4628125, y: 1.51}
     newSize: {x: 1.46, y: 1.51}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -225,3 +226,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MaxHealth: 100
+  element: 0
+  burning: 0
+  currentHealth: 0
