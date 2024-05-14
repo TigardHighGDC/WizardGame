@@ -7,6 +7,8 @@ public class EnemyHealth : MonoBehaviour
 {
     public float MaxHealth = 100.0f;
 
+    public ElementType element = ElementType.None;
+
     [HideInInspector]
     public float burning = 0.0f;
 
@@ -24,12 +26,12 @@ public class EnemyHealth : MonoBehaviour
         if (burning > 0.0f)
         {
             burning -= Time.deltaTime;
-            TakeDamage(10f * Time.deltaTime);
+            TakeDamage(10f * Time.deltaTime, ElementType.Fire);
         }
     }
-    public void TakeDamage(float damage)
+    public void TakeDamage(float damage, ElementType spellElement)
     {
-        currentHealth -= damage;
+        currentHealth -= damage * ElementTypeMultiplier(spellElement, element);
         if (currentHealth <= 0.0f)
         {
             Destroy(gameObject);
@@ -67,5 +69,63 @@ public class EnemyHealth : MonoBehaviour
         }
 
         isFlashing = false;
+    }
+
+    private float ElementTypeMultiplier(ElementType spellElement, ElementType enemyElement)
+    {
+        switch (spellElement)
+        {
+        case ElementType.Air:
+            switch (enemyElement)
+            {
+            case ElementType.Fire:
+                return 0.75f;
+            case ElementType.Earth:
+                return 1.25f;
+            default:
+                return 1.0f;
+            }
+        case ElementType.Fire:
+            switch (enemyElement)
+            {
+            case ElementType.Water:
+                return 0.75f;
+            case ElementType.Air:
+                return 1.25f;
+            default:
+                return 1.0f;
+            }
+        case ElementType.Water:
+            switch (enemyElement)
+            {
+            case ElementType.Earth:
+                return 0.75f;
+            case ElementType.Fire:
+                return 1.25f;
+            default:
+                return 1.0f;
+            }
+        case ElementType.Earth:
+            switch (enemyElement)
+            {
+            case ElementType.Air:
+                return 0.75f;
+            case ElementType.Water:
+                return 1.25f;
+            default:
+                return 1.0f;
+            }
+        default:
+            return 1.0f;
+        }
+    }
+
+    public enum ElementType
+    {
+        Air,
+        Fire,
+        Water,
+        Earth,
+        None
     }
 }

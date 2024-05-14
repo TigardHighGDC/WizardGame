@@ -17,7 +17,7 @@ public class FireBall : MonoBehaviour
     {
         if ((collision.tag == "Enemy" || collision.tag == "Interactable") && collision.isTrigger)
         {
-            collision.GetComponent<EnemyHealth>().TakeDamage(25.0f);
+            collision.GetComponent<EnemyHealth>().TakeDamage(25.0f, EnemyHealth.ElementType.Fire);
             Instantiate(FireWall, SpawnPoint.transform.position, Quaternion.identity);
             Destroy(gameObject);
         }

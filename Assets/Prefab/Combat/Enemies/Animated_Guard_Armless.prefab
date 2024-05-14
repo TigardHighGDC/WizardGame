@@ -316,6 +316,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MaxHealth: 75
+  element: 0
   burning: 0
   currentHealth: 0
 --- !u!114 &4347723215265381208

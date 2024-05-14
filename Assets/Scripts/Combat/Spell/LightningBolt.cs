@@ -14,7 +14,7 @@ public class LightningBolt : MonoBehaviour
     {
         if (collision.tag == "Enemy" && collision.isTrigger)
         {
-            collision.GetComponent<EnemyHealth>().TakeDamage(35.0f);
+            collision.GetComponent<EnemyHealth>().TakeDamage(35.0f, EnemyHealth.ElementType.Air);
             if (collision.TryGetComponent<BasicEnemy>(out BasicEnemy enemy))
             {
                 enemy.StartStun();

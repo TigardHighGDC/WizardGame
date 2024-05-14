@@ -24,7 +24,7 @@ public class Earthquake : MonoBehaviour
 
         if (collision.tag == "Enemy" && collision.isTrigger)
         {
-            collision.GetComponent<EnemyHealth>().TakeDamage(20.0f);
+            collision.GetComponent<EnemyHealth>().TakeDamage(20.0f, EnemyHealth.ElementType.Earth);
             collision.GetComponent<BasicEnemy>().StartStun(2.0f);
             Knockback(collision.gameObject, Player.Instance);
         }
