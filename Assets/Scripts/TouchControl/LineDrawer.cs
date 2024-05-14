@@ -103,12 +103,10 @@ public class LineDrawer : MonoBehaviour
             DirectionJoystick.Instance.SetJoystick(position);
             DirectionJoystick.Instance.SetJoystickCenterPoint(position);
             return false;
-            break;
 
         case TouchPhase.Moved:
             DirectionJoystick.Instance.SetJoystickCenterPoint(AdjustPointToScreen(8, touch.position));
             return false;
-            break;
 
         case TouchPhase.Ended:
             Player.Instance.GetComponent<Player>().CastSpell(spellStorage);
@@ -117,7 +115,6 @@ public class LineDrawer : MonoBehaviour
                 DirectionJoystick.Instance.joystick.transform.localPosition);
             DirectionJoystick.Instance.Hide();
             return true;
-            break;
 
         case TouchPhase.Canceled:
             Player.Instance.GetComponent<Player>().CastSpell(spellStorage);
@@ -126,7 +123,6 @@ public class LineDrawer : MonoBehaviour
                 DirectionJoystick.Instance.joystick.transform.localPosition);
             DirectionJoystick.Instance.Hide();
             return true;
-            break;
         }
         return false;
     }
