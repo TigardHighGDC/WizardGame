@@ -36,13 +36,13 @@ public class SketchOutput : MonoBehaviour
         return "";
     }
 
-    public static bool Compare(PrimitiveContainer[] sketch, PrimitiveContainer[] template, float threshold = 0.6f)
+    public static bool Compare(PrimitiveContainer[] sketch, PrimitiveContainer[] template, float threshold = 0.7f)
     {
         float sizeCheck = (1.0f / sketch.Length) * 0.35f;
         int u = 0;
         bool? concaveReverse = null;
         float prevRotation = -10f;
-
+        
         for (int i = 0; i < sketch.Length; i++)
         {
             // Removes small lines
@@ -69,7 +69,7 @@ public class SketchOutput : MonoBehaviour
                 return false;
             }
             if (thresholdCheck(sketch[i].Length, template[u].Length, threshold) &&
-                radianThresholdCheck(sketch, template, i, u, 0.7f, prevRotation))
+                radianThresholdCheck(sketch, template, i, u, 0.9f, prevRotation))
             {
                 if (sketch[i].Type == 1)
                 {

@@ -38,14 +38,14 @@ public class HighLevelRecognition : MonoBehaviour
         while (i < corners.Length)
         {
             CalculateIndicators(i - 2, i, points);
-            if (circle[0] < lineDeviation && DCR < 3.5f && NDDE > 0.8f && circle[1] > 0.1f)
+            if (circle[0] < lineDeviation && DCR < 3.3f && NDDE > 0.75f && circle[1] > 0.1f)
             {
                 // Is Arc, Keep going
                 int current = i;
                 for (int u = i + 1; u < corners.Length; u++)
                 {
                     CalculateIndicators(i - 2, u, points);
-                    if (circle[0] < lineDeviation && circle[1] < 1.2 && DCR < 3.5f && NDDE > 0.85f && circle[0] < 0.5f)
+                    if (circle[0] < lineDeviation && circle[1] < 1.2 && DCR < 3.3f && NDDE > 0.85f && circle[0] < 0.6f)
                     {
                         current = u;
                         continue;
