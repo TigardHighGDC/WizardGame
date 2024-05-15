@@ -31,7 +31,6 @@ public class EnemyHealth : MonoBehaviour
     }
     public virtual void TakeDamage(float damage, ElementType spellElement)
     {
-        Debug.Log("Didnt work");
         currentHealth -= damage * ElementTypeMultiplier(spellElement, element);
         if (currentHealth <= 0.0f)
         {
@@ -72,7 +71,7 @@ public class EnemyHealth : MonoBehaviour
         isFlashing = false;
     }
 
-    private float ElementTypeMultiplier(ElementType spellElement, ElementType enemyElement)
+    protected float ElementTypeMultiplier(ElementType spellElement, ElementType enemyElement)
     {
         switch (spellElement)
         {
