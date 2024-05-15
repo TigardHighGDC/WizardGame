@@ -16167,7 +16167,8 @@ MonoBehaviour:
   - '*The left side of the screen controls movement. Sketch spells on the right side
     of the screen. If the spell is recognized the player will have an aura representing
     the spell charge. Tap on the right side of the screen again for a joystick to
-    aim the spell''s direction. Let go of the joystick to cast the spell. '
+    aim the spell''s direction. Let go of the joystick to cast the spell. Tap on
+    NPCs to communicate with them.'
 --- !u!61 &2020419711
 BoxCollider2D:
   m_ObjectHideFlags: 0
