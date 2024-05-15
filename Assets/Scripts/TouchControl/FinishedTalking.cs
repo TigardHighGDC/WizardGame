@@ -15,7 +15,7 @@ public class FinishedTalking : MonoBehaviour
         {
             startedTalking = true;
         }
-        if (isActivated && startedTalking&& !DialogueBox.Instance.IsTalking)
+        if (isActivated && startedTalking && !DialogueBox.Instance.IsTalking)
         {
             SceneManager.LoadScene(Location);
         }

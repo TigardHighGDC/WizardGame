@@ -7,7 +7,7 @@ public class BrotherTutorial : MonoBehaviour
     public GameObject Brother;
     int dialogueIndex = 0;
     public BrotherHealth brotherHealth;
-    
+
     [Header("Signs")]
     public GameObject airPrefab;
     public GameObject earthPrefab;
@@ -21,7 +21,8 @@ public class BrotherTutorial : MonoBehaviour
         {
             earthPrefab.SetActive(true);
             airPrefab.SetActive(false);
-            DialogueBox.Instance.StartDialogue(new string[] {"Next try casting earth."}, Brother.GetComponent<SpriteRenderer>().sprite);
+            DialogueBox.Instance.StartDialogue(new string[] { "Next try casting earth." },
+                                               Brother.GetComponent<SpriteRenderer>().sprite);
             dialogueIndex = 1;
         }
 
@@ -29,7 +30,8 @@ public class BrotherTutorial : MonoBehaviour
         {
             waterPrefab.SetActive(true);
             earthPrefab.SetActive(false);
-            DialogueBox.Instance.StartDialogue(new string[] {"Next try casting water."}, Brother.GetComponent<SpriteRenderer>().sprite);
+            DialogueBox.Instance.StartDialogue(new string[] { "Next try casting water." },
+                                               Brother.GetComponent<SpriteRenderer>().sprite);
             dialogueIndex = 2;
         }
 
@@ -37,7 +39,8 @@ public class BrotherTutorial : MonoBehaviour
         {
             firePrefab.SetActive(true);
             waterPrefab.SetActive(false);
-            DialogueBox.Instance.StartDialogue(new string[] {"Next try casting fire."}, Brother.GetComponent<SpriteRenderer>().sprite);
+            DialogueBox.Instance.StartDialogue(new string[] { "Next try casting fire." },
+                                               Brother.GetComponent<SpriteRenderer>().sprite);
             dialogueIndex = 3;
         }
 
@@ -45,7 +48,11 @@ public class BrotherTutorial : MonoBehaviour
         {
             shieldPrefab.SetActive(true);
             firePrefab.SetActive(false);
-            DialogueBox.Instance.StartDialogue(new string[] {"Finally try casting the shield spell. Keep walking down the path and you should be able to the castle."}, Brother.GetComponent<SpriteRenderer>().sprite);
+            DialogueBox.Instance.StartDialogue(
+                new string[] {
+                    "Finally try casting the shield spell. Keep walking down the path and you should be able to the castle."
+                },
+                Brother.GetComponent<SpriteRenderer>().sprite);
             dialogueIndex = 4;
         }
     }
