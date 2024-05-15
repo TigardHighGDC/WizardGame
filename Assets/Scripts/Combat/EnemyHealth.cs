@@ -15,7 +15,7 @@ public class EnemyHealth : MonoBehaviour
     [HideInInspector]
     public float currentHealth;
 
-    private bool isFlashing = false;
+    protected bool isFlashing = false;
 
     private void Start()
     {
@@ -29,8 +29,9 @@ public class EnemyHealth : MonoBehaviour
             TakeDamage(10f * Time.deltaTime, ElementType.Fire);
         }
     }
-    public void TakeDamage(float damage, ElementType spellElement)
+    public virtual void TakeDamage(float damage, ElementType spellElement)
     {
+        Debug.Log("Didnt work");
         currentHealth -= damage * ElementTypeMultiplier(spellElement, element);
         if (currentHealth <= 0.0f)
         {
@@ -42,7 +43,7 @@ public class EnemyHealth : MonoBehaviour
         }
     }
 
-    private IEnumerator FlashOnHit()
+    protected IEnumerator FlashOnHit()
     {
         isFlashing = true;
         SpriteRenderer sprite = GetComponent<SpriteRenderer>();

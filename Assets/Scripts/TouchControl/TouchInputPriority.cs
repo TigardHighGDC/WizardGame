@@ -110,6 +110,11 @@ public class TouchInputPriority : MonoBehaviour
                     }
                     break;
                 case TouchPhase.Moved:
+                    if (DialogueBox.Instance.IsTalking)
+                    {
+                        leftFindTouch = true;
+                        break;
+                    }
                     MovementJoystickMove(leftTouch);
                     break;
 
