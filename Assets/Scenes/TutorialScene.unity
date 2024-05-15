@@ -843,7 +843,7 @@ GameObject:
   - component: {fileID: 1327517700}
   m_Layer: 0
   m_Name: Decoration-W-Coliders
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -945,9 +945,9 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 3
-      m_TileSpriteIndex: 5
+      m_TileSpriteIndex: 6
       m_TileMatrixIndex: 0
-      m_TileColorIndex: 2
+      m_TileColorIndex: 3
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
       m_AllTileFlags: 1073741827
@@ -1215,9 +1215,9 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 2
-      m_TileSpriteIndex: 4
+      m_TileSpriteIndex: 5
       m_TileMatrixIndex: 0
-      m_TileColorIndex: 1
+      m_TileColorIndex: 2
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
       m_AllTileFlags: 1073741827
@@ -2316,12 +2316,12 @@ Tilemap:
     m_Data: {fileID: 21300000, guid: 8f445c8fc28323b4c8e4d61e7182aaf4, type: 3}
   - m_RefCount: 25
     m_Data: {fileID: 21300000, guid: f9280bec0f0e09b4d80dfe99ad655035, type: 3}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
   - m_RefCount: 1
     m_Data: {fileID: 307286617}
   - m_RefCount: 1
     m_Data: {fileID: 1056604712}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
   m_TileMatrixArray:
   - m_RefCount: 137
     m_Data:
@@ -2344,12 +2344,12 @@ Tilemap:
   m_TileColorArray:
   - m_RefCount: 135
     m_Data: {r: 1, g: 1, b: 1, a: 1}
+  - m_RefCount: 0
+    m_Data: {r: 3.6546e-41, g: 3.6546e-41, b: 3.6546e-41, a: 3.6546e-41}
   - m_RefCount: 1
     m_Data: {r: 0.93077743, g: 0.40340558, b: 0.55082464, a: 1}
   - m_RefCount: 1
     m_Data: {r: 0.89086455, g: 0.61898714, b: 0.70161295, a: 1}
-  - m_RefCount: 0
-    m_Data: {r: 3.943e-41, g: 3.943e-41, b: 3.943e-41, a: 3.943e-41}
   m_TileObjectToInstantiateArray: []
   m_AnimationFrameRate: 1
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -2515,7 +2515,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5958553627423402925, guid: cea347e2500309543bdfa44bc8850e5f, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6818259797476383662, guid: cea347e2500309543bdfa44bc8850e5f, type: 3}
       propertyPath: m_Pivot.x
