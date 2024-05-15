@@ -1955,7 +1955,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Dialogue:
   - Oh.
-  - Your Felis. I thought you were the big dude.
+  - Your Felis? I thought you were the big dude.
   - Nevermind I can work with this.
   - I need you to retrieve the four powerful crystals from the elemental islands.
     We must act before they attack.
@@ -1970,7 +1970,7 @@ MonoBehaviour:
     monster quickly so it can\u2019t poison your mind."
   - "And don\u2019t get me started on the Earth island. So much hippie nonsense."
   - "Once you retrieve all of these crystals return them to me. I\u2019ll be able
-    to use these crystals for good."
+    to use these crystals for...  good."
   - "I\u2019ll teleport you in\u2026"
   - "3\u2026"
   - 2...
