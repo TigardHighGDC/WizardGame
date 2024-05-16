@@ -15613,22 +15613,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: SealController
       objectReference: {fileID: 0}
-    - target: {fileID: 5100931790801682853, guid: 3082b1d04412fcf4ca7e792287a94b1e, type: 3}
-      propertyPath: m_Size.x
-      value: 1.5784583
-      objectReference: {fileID: 0}
-    - target: {fileID: 5100931790801682853, guid: 3082b1d04412fcf4ca7e792287a94b1e, type: 3}
-      propertyPath: m_Size.y
-      value: 2.9442186
-      objectReference: {fileID: 0}
-    - target: {fileID: 5100931790801682853, guid: 3082b1d04412fcf4ca7e792287a94b1e, type: 3}
-      propertyPath: m_Offset.x
-      value: 0.1564424
-      objectReference: {fileID: 0}
-    - target: {fileID: 5100931790801682853, guid: 3082b1d04412fcf4ca7e792287a94b1e, type: 3}
-      propertyPath: m_Offset.y
-      value: 0.55702543
-      objectReference: {fileID: 0}
     - target: {fileID: 5545456142789276488, guid: 3082b1d04412fcf4ca7e792287a94b1e, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
