@@ -16,6 +16,15 @@ public class MeleeAttack : MonoBehaviour
         }
     }
 
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.tag == "Player" && attackCooldown <= 0.0f)
+        {
+            attackCooldown = canAttack;
+            other.gameObject.GetComponent<PlayerHealth>().TakeDamage(damage);
+        }
+    }
+
     void OnTriggerStay2D(Collider2D other)
     {
         if (other.gameObject.tag == "Player" && attackCooldown <= 0.0f)

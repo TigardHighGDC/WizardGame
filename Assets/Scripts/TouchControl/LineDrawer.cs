@@ -22,7 +22,7 @@ public class LineDrawer : MonoBehaviour
         // Does not need directional joystick
         if (spellStorage == "shield")
         {
-            PlayerHealth.Instance.SetInvincability(2.0f);
+            PlayerHealth.Instance.SetInvincability(12.0f);
             spellStorage = "";
             return;
         }
