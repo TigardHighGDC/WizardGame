@@ -9,6 +9,8 @@ public class MusicPlayer : MonoBehaviour
     public AudioClip[] peaceful;
     public AudioClip[] enemy;
     public AudioSource source;
+    public AudioSource sourceSpell;
+    public static MusicPlayer Instance;
     
     private bool attackMusic = false;
     private bool transitioning = false;
@@ -20,6 +22,7 @@ public class MusicPlayer : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        Instance = this;
     }
 
     private void Start()
