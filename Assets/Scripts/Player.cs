@@ -19,14 +19,22 @@ public class Player : MonoBehaviour
     public GameObject waterAura;
     public GameObject earthAura;
 
+    [Header("SpellSound")]
+    public AudioClip lightningSound;
+    public AudioClip fireSound;
+    public AudioClip waterSound;
+    public AudioClip earthSound;
+
     private Rigidbody2D rb;
     private Animator anim;
+    private AudioSource audioSource;
 
     void Start()
     {
         Instance = gameObject;
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>();
         MovementJoystick.Instance.Hide();
     }
 
@@ -82,18 +90,22 @@ public class Player : MonoBehaviour
         case "lightning":
             GameObject lightning =
                 Instantiate(lightningBolt, transform.position, Quaternion.FromToRotation(transform.up, direction));
+                audioSource.PlayOneShot(lightningSound);
             break;
         case "fire":
             GameObject fire =
                 Instantiate(fireBall, transform.position, Quaternion.FromToRotation(transform.up, direction));
+                audioSource.PlayOneShot(fireSound);
             break;
         case "water":
             GameObject water = Instantiate(waterWave, transform.position + direction,
                                            Quaternion.FromToRotation(transform.up, direction));
+                audioSource.PlayOneShot(waterSound);
             break;
         case "earth":
             GameObject earth =
                 Instantiate(earthquake, transform.position, Quaternion.FromToRotation(transform.up, direction));
+                audioSource.PlayOneShot(earthSound);
             break;
         }
         DestroyAura();
