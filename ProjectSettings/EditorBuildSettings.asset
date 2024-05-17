@@ -32,6 +32,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/LoadSceneMenu.unity
     guid: 8c8c2a8b735e2fa48a0d41985a5d3240
+  - enabled: 1
+    path: Assets/Scenes/SealFight.unity
+    guid: c864ff88ecfefe44ebe3262344d1362c
   m_configObjects:
     com.unity.adaptiveperformance.loader_settings: {fileID: 11400000, guid: 1d42c9c49388c1640b16a8bbfc983157, type: 2}
     com.unity.adaptiveperformance.simulator.provider_settings: {fileID: 11400000, guid: 3eb05e13d47e94045a9f067f9f79e40c, type: 2}
