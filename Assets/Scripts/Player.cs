@@ -90,22 +90,22 @@ public class Player : MonoBehaviour
         case "lightning":
             GameObject lightning =
                 Instantiate(lightningBolt, transform.position, Quaternion.FromToRotation(transform.up, direction));
-                audioSource.PlayOneShot(lightningSound);
+            audioSource.PlayOneShot(lightningSound);
             break;
         case "fire":
             GameObject fire =
                 Instantiate(fireBall, transform.position, Quaternion.FromToRotation(transform.up, direction));
-                audioSource.PlayOneShot(fireSound);
+            audioSource.PlayOneShot(fireSound);
             break;
         case "water":
             GameObject water = Instantiate(waterWave, transform.position + direction,
                                            Quaternion.FromToRotation(transform.up, direction));
-                audioSource.PlayOneShot(waterSound);
+            audioSource.PlayOneShot(waterSound);
             break;
         case "earth":
             GameObject earth =
                 Instantiate(earthquake, transform.position, Quaternion.FromToRotation(transform.up, direction));
-                audioSource.PlayOneShot(earthSound);
+            audioSource.PlayOneShot(earthSound);
             break;
         }
         DestroyAura();

@@ -11,7 +11,7 @@ public class MusicPlayer : MonoBehaviour
     public AudioSource source;
     public AudioSource sourceSpell;
     public static MusicPlayer Instance;
-    
+
     private bool attackMusic = false;
     private bool transitioning = false;
 
@@ -32,9 +32,10 @@ public class MusicPlayer : MonoBehaviour
 
     private void Update()
     {
-        if (GameObject.FindGameObjectsWithTag("Enemy").Length > 0 && !attackMusic )
+        if (GameObject.FindGameObjectsWithTag("Enemy").Length > 0 && !attackMusic)
         {
-            FadeInTransition(enemy);;
+            FadeInTransition(enemy);
+            ;
             attackMusic = true;
         }
         if (GameObject.FindGameObjectsWithTag("Enemy").Length == 0 && attackMusic)
