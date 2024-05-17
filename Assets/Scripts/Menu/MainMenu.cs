@@ -7,7 +7,7 @@ public class MainMenu : MonoBehaviour
 {
     public void OnPlayButton()
     {
-        SceneManager.LoadScene("TutorialScene");
+        SceneManager.LoadScene("AirIslandTileMap");
     }
 
     public void OnLoadSceneButton()

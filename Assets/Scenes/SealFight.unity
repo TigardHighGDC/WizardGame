@@ -473,6 +473,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Boss: {fileID: 1174133635}
   Dialogue:
+  - I'm the guardian of the water crystal. My job is to keep the magic of the world
+    in balance. How do I say this...
   - Let me give you a riddle.
   - What island is about to be attacked?
   - ...
@@ -486,8 +488,7 @@ MonoBehaviour:
   - "It's the KING. the king is evil and tr\u2026 Hey! Stop trying to plug your ears.
     Did he tell you to do that?"
   - Just give me the crystal and everything will go back to the way it should be.
-  - "No\u2026 Fine. It's unfortunate that it must come to this. As the guardian of
-    the water crystal, it\u2019s time to die."
+  - "No\u2026 Fine. It's unfortunate that it must come to this."
   BossSprite: {fileID: 21300000, guid: c892bc00a40fee64283dae3c53cb37ec, type: 3}
 --- !u!1001 &710519210
 PrefabInstance:

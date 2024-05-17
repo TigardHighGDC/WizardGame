@@ -12,7 +12,6 @@ TagManager:
   - Enemy
   - Wall
   - Interactable
-  - Music Player
   layers:
   - Default
   - TransparentFX

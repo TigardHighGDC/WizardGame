@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 
 public class PlayerHealth : MonoBehaviour
 {
@@ -51,7 +50,7 @@ public class PlayerHealth : MonoBehaviour
         if (currentHealth <= 0.0f)
         {
             Slider.value = 0.0f;
-            SceneManager.LoadScene("LoadSceneMenu");
+            Destroy(gameObject);
         }
         else
         {
