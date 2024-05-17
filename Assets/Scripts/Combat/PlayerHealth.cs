@@ -44,7 +44,7 @@ public class PlayerHealth : MonoBehaviour
     {
         if (invincability > 0.0f)
         {
-            return;
+            damage /= 2.0f;
         }
         currentHealth -= damage;
         if (currentHealth <= 0.0f)
