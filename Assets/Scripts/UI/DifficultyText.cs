@@ -12,5 +12,4 @@ public class DifficultyText : MonoBehaviour
     {
         text.text = "Current Health: " + PlayerPrefs.GetFloat("Health", 100.0f);
     }
-    
 }

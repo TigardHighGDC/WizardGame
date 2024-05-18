@@ -17,7 +17,7 @@ public class MainMenu : MonoBehaviour
 
     public void OnSettingsButton()
     {
-        SceneManager.LoadScene("Settings");
+        SceneManager.LoadScene("Setting");
     }
 
     public void OnMainMenuButton()
