@@ -27,6 +27,7 @@ public class DialogueBox : MonoBehaviour
         CharacterSprite.sprite = sprite;
         gameObject.SetActive(true);
         NextParagraph();
+        TouchInputPriority.Instance.Reset();
     }
 
     public void NextParagraph()

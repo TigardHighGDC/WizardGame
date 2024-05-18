@@ -6,6 +6,7 @@ public class TouchInputPriority : MonoBehaviour
 {
     public bool FightMode = false;
     public LineDrawer lineDrawer;
+    public static TouchInputPriority Instance;
 
     private bool joystickStart = false;
 
@@ -18,7 +19,12 @@ public class TouchInputPriority : MonoBehaviour
     private int rightTouchIndex = -1;
     private bool rightFindTouch = true;
 
-    void Update()
+    private void Start()
+    {
+        Instance = this;
+    }
+
+    private void Update()
     {
         if (Input.touchCount > 0)
         {
@@ -72,7 +78,16 @@ public class TouchInputPriority : MonoBehaviour
 
             if (leftTouchIndex != -1 && !leftFindTouch)
             {
-                Touch leftTouch = Input.GetTouch(leftTouchIndex);
+                Touch leftTouch;
+                try
+                {
+                    leftTouch = Input.GetTouch(leftTouchIndex);
+                }
+                catch
+                {
+                    leftFindTouch = true;
+                    return;
+                }
                 // Handle finger movements based on TouchPhase
                 switch (leftTouch.phase)
                 {
@@ -92,17 +107,17 @@ public class TouchInputPriority : MonoBehaviour
                     Dictionary<string, GameObject> tag = new Dictionary<string, GameObject>();
                     foreach (Collider2D collider in colliders)
                     {
-                        tag.Add(collider.gameObject.tag, collider.gameObject);
+                        if (!tag.ContainsKey(collider.tag))
+                        {
+                            tag.Add(collider.gameObject.tag, collider.gameObject);
+                        }
                     }
 
                     if (tag.ContainsKey("NPC"))
                     {
                         DialogueStorage speech = tag["NPC"].GetComponent<DialogueStorage>();
                         DialogueBox.Instance.StartDialogue(speech.Dialogue, speech.Sprite);
-                        lineDrawer.LineCancel();
-                        MovementJoystickEnd();
-                        leftFindTouch = true;
-                        lineDrawer.SpellCancel();
+                        Reset();
                     }
                     else
                     {
@@ -137,7 +152,16 @@ public class TouchInputPriority : MonoBehaviour
 
             if (rightTouchIndex != -1 && !rightFindTouch)
             {
-                Touch rightTouch = Input.GetTouch(rightTouchIndex);
+                Touch rightTouch;
+                try
+                {
+                    rightTouch = Input.GetTouch(rightTouchIndex);
+                }
+                catch
+                {
+                    rightFindTouch = true;
+                    return;
+                }
                 if (lineDrawer.spellStorage != "" && !DialogueBox.Instance.IsTalking)
                 {
                     rightFindTouch = lineDrawer.SpellCast(rightTouch);
@@ -161,17 +185,17 @@ public class TouchInputPriority : MonoBehaviour
                     Dictionary<string, GameObject> tag = new Dictionary<string, GameObject>();
                     foreach (Collider2D collider in colliders)
                     {
-                        tag.Add(collider.gameObject.tag, collider.gameObject);
+                        if (!tag.ContainsKey(collider.tag))
+                        {
+                            tag.Add(collider.gameObject.tag, collider.gameObject);
+                        }
                     }
 
                     if (tag.ContainsKey("NPC"))
                     {
                         DialogueStorage speech = tag["NPC"].GetComponent<DialogueStorage>();
                         DialogueBox.Instance.StartDialogue(speech.Dialogue, speech.Sprite);
-                        lineDrawer.LineCancel();
-                        MovementJoystickEnd();
-                        rightFindTouch = true;
-                        lineDrawer.SpellCancel();
+                        Reset();
                     }
                     else
                     {
@@ -200,6 +224,15 @@ public class TouchInputPriority : MonoBehaviour
                 lineDrawer.LineCancel();
             }
         }
+    }
+
+    public void Reset()
+    {
+        lineDrawer.LineCancel();
+        MovementJoystickEnd();
+        rightFindTouch = true;
+        leftFindTouch = true;
+        lineDrawer.SpellCancel();
     }
 
     private void MovementJoystickStart(Vector3 position)
