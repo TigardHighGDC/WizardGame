@@ -7,7 +7,7 @@ public class MainMenu : MonoBehaviour
 {
     public void OnPlayButton()
     {
-        SceneManager.LoadScene("TutorialScene");
+        SceneManager.LoadScene(PlayerPrefs.GetString("Scene", "TutorialScene"));
     }
 
     public void OnLoadSceneButton()
@@ -15,8 +15,23 @@ public class MainMenu : MonoBehaviour
         SceneManager.LoadScene("LoadSceneMenu");
     }
 
+    public void OnSettingsButton()
+    {
+        SceneManager.LoadScene("Settings");
+    }
+
+    public void OnMainMenuButton()
+    {
+        SceneManager.LoadScene("MainMenu");
+    }
+
     public void OnCreditsButton()
     {
         SceneManager.LoadScene("Credits");
+    }
+
+    public void ResetButton()
+    {
+        PlayerPrefs.DeleteAll();
     }
 }

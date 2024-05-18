@@ -7,7 +7,8 @@ using UnityEngine.SceneManagement;
 public class PlayerHealth : MonoBehaviour
 {
     public static PlayerHealth Instance;
-    public float MaxHealth = 100.0f;
+    [HideInInspector]
+    public float MaxHealth;
     public Slider Slider;
     public GameObject Shield;
 
@@ -17,6 +18,7 @@ public class PlayerHealth : MonoBehaviour
 
     private void Start()
     {
+        MaxHealth = PlayerPrefs.GetFloat("Health", 100.0f);
         Instance = this;
         currentHealth = MaxHealth;
     }
@@ -51,7 +53,7 @@ public class PlayerHealth : MonoBehaviour
         if (currentHealth <= 0.0f)
         {
             Slider.value = 0.0f;
-            SceneManager.LoadScene("LoadSceneMenu");
+            SceneManager.LoadScene("Died");
         }
         else
         {

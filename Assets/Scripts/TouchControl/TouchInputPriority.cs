@@ -9,7 +9,7 @@ public class TouchInputPriority : MonoBehaviour
     public static TouchInputPriority Instance;
 
     private bool joystickStart = false;
-
+    private float inverse;
     // Stores the touch id of the touch that is currently being tracked
     private int leftTouchId = -1;
     private int leftTouchIndex = -1;
@@ -22,6 +22,7 @@ public class TouchInputPriority : MonoBehaviour
     private void Start()
     {
         Instance = this;
+        inverse = PlayerPrefs.GetFloat("SketchPosition", 1);
     }
 
     private void Update()
@@ -34,7 +35,7 @@ public class TouchInputPriority : MonoBehaviour
                 for (int i = 0; i < Input.touchCount; i++)
                 {
                     if (Input.GetTouch(i).phase == TouchPhase.Began &&
-                        (AdjustPointToScreen(8, Input.GetTouch(i).position).x < 0.0f || !FightMode))
+                        (AdjustPointToScreen(8, Input.GetTouch(i).position).x * inverse < 0.0f || !FightMode))
                     {
                         leftTouchId = Input.GetTouch(i).fingerId;
                         leftFindTouch = false;
@@ -58,7 +59,7 @@ public class TouchInputPriority : MonoBehaviour
                 for (int i = 0; i < Input.touchCount; i++)
                 {
                     if (Input.GetTouch(i).phase == TouchPhase.Began &&
-                        (AdjustPointToScreen(8, Input.GetTouch(i).position).x > 0.0f || !FightMode))
+                        (AdjustPointToScreen(8, Input.GetTouch(i).position).x * inverse > 0.0f || !FightMode))
                     {
                         rightTouchId = Input.GetTouch(i).fingerId;
                         rightFindTouch = false;
