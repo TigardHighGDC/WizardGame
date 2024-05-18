@@ -17,7 +17,7 @@ public class Setting : MonoBehaviour
 
     public void OnEasyButton()
     {
-        PlayerPrefs.SetFloat("Health", 150f);
+        PlayerPrefs.SetFloat("Health", 200f);
     }
 
     public void OnNormalButton()

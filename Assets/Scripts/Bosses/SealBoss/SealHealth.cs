@@ -5,8 +5,9 @@ using UnityEngine;
 public class SealHealth : EnemyHealth
 {
     public SealController controller;
-
     public float HealthLossTrigger = 100.0f;
+    public GameObject crystal;
+
     private float healthLoss;
 
     private void Start()
@@ -26,6 +27,7 @@ public class SealHealth : EnemyHealth
         }
         if (currentHealth <= 0.0f)
         {
+            Instantiate(crystal, transform.position, Quaternion.identity);
             Destroy(gameObject);
         }
         if (!isFlashing)

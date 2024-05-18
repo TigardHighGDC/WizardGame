@@ -37,7 +37,7 @@ public class LevelSelectMenu : MonoBehaviour
 
     public void OnMainIslandFightButton()
     {
-        SceneManager.LoadScene("TBD");
+        SceneManager.LoadScene("MainMenuFight");
     }
 
     public void OnMainIslandButton()
@@ -47,6 +47,6 @@ public class LevelSelectMenu : MonoBehaviour
 
     public void OnFinalBossIslandButton()
     {
-        SceneManager.LoadScene("TBD");
+        SceneManager.LoadScene("Castle");
     }
 }
