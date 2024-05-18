@@ -297,6 +297,7 @@ MonoBehaviour:
   currentHealth: 0
   controller: {fileID: 5401558714186140086}
   HealthLossTrigger: 150
+  crystal: {fileID: 2430951064226988887, guid: 7e09d9d455e878046b0a77cc7f840ce5, type: 3}
 --- !u!1 &3913178619495520244
 GameObject:
   m_ObjectHideFlags: 0
