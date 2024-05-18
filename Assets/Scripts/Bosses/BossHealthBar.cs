@@ -19,6 +19,10 @@ public class BossHealthBar : MonoBehaviour
     private void Update()
     {
         SetHealth(enemyHealth.currentHealth);
+        if (enemyHealth == null)
+        {
+            Destroy(gameObject);
+        }
     }
 
     // Set the number that it considered the max.

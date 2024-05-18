@@ -13,7 +13,7 @@ public class SealController : MonoBehaviour
     public bool canDive = true;
     [HideInInspector]
     public bool firstDive = true;
-    
+
     [HideInInspector]
     public bool start = false;
 
@@ -31,6 +31,8 @@ public class SealController : MonoBehaviour
         if (!canDive && startChasing && !jumped)
         {
             SealMelee.SetActive(true);
+            SealMelee.GetComponent<BasicEnemy>().StopAllCoroutines();
+            SealMelee.GetComponent<BasicEnemy>().StartStun(0.1f);
             SealMelee.transform.position = Seal.transform.position;
             Seal.SetActive(false);
             startChasing = false;
@@ -49,12 +51,13 @@ public class SealController : MonoBehaviour
                 Seal.SetActive(true);
                 Seal.transform.position = SealMelee.transform.position;
                 SealMelee.SetActive(false);
+                firstDive = false;
             }
             StartCoroutine(Dive());
             if (jumpCount % 2 == 0)
             {
-                Vector3 spawnPosition = transform.position + new Vector3(Random.Range(-10f, 10f),
-                                                                     Random.Range(-10f, 10f), 0);
+                Vector3 spawnPosition =
+                    transform.position + new Vector3(Random.Range(-10f, 10f), Random.Range(-10f, 10f), 0);
                 Instantiate(jellyFish, spawnPosition, Quaternion.identity);
             }
 
@@ -84,7 +87,7 @@ public class SealController : MonoBehaviour
 
         yield return new WaitForSeconds(0.5f);
         rb.velocity = new Vector2(0, 0);
-        
+
         yield return new WaitForSeconds(1.5f);
         Seal.GetComponent<Animator>().Play("None");
 

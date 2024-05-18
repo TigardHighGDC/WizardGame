@@ -12,9 +12,10 @@ public class BasicEnemy : MonoBehaviour
     protected Rigidbody2D rb;
     protected bool stunned = false;
 
-    private void Start()
+    private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        stunned = false;
     }
 
     private void FixedUpdate()
